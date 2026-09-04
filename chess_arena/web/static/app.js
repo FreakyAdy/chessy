@@ -572,23 +572,50 @@
         <input type="checkbox" id="chk-${bot.id}" value="${bot.id}" ${isSelected ? 'checked' : ''} ${!bot.is_eligible ? 'disabled' : ''}>
         <div class="bot-card-info">
           <div class="bot-card-name">
-            <span>${bot.name}</span>
+            <span class="bot-title-text">${bot.name}</span>
             <span class="badge ${badgeType}">${bot.type}</span>
             ${bot.is_eligible ? '<span class="badge badge-eligible">Eligible</span>' : '<span class="badge badge-disqualified">Disqualified</span>'}
+            ${bot.is_uploaded ? `<button class="btn-delete-bot" title="Delete custom bot" data-id="${bot.id}">🗑 Delete</button>` : ''}
           </div>
           <div class="bot-card-desc">${bot.description}</div>
         </div>
       `;
 
       card.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-delete-bot')) return;
         if (e.target.tagName !== 'INPUT' && bot.is_eligible) {
-          const chk = card.querySelector('input');
+          const chk = card.querySelector('input[type="checkbox"]');
           chk.checked = !chk.checked;
           chk.dispatchEvent(new Event('change'));
         }
       });
 
-      const chk = card.querySelector('input');
+      const delBtn = card.querySelector('.btn-delete-bot');
+      if (delBtn) {
+        delBtn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          if (!confirm(`Are you sure you want to permanently delete custom bot "${bot.name}"?`)) return;
+          try {
+            delBtn.disabled = true;
+            delBtn.textContent = '...';
+            const resp = await fetch(`/api/bots/${encodeURIComponent(bot.id)}`, { method: 'DELETE' });
+            if (!resp.ok) {
+              const err = await resp.json();
+              alert(`Could not delete bot: ${err.detail || 'Unknown error'}`);
+              delBtn.disabled = false;
+              delBtn.textContent = '🗑 Delete';
+              return;
+            }
+            selectedBotIds.delete(bot.id);
+            await loadBots();
+          } catch (err) {
+            console.error('Delete bot failed:', err);
+            alert('Failed to delete bot.');
+          }
+        });
+      }
+
+      const chk = card.querySelector('input[type="checkbox"]');
       chk.addEventListener('change', (e) => {
         if (e.target.checked) {
           if (selectedBotIds.size >= 5) {

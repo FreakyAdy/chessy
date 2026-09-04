@@ -201,6 +201,43 @@ async def upload_bot(file: UploadFile = File(...)):
     }
 
 
+@app.delete("/api/bots/{bot_id}")
+@app.post("/api/bots/{bot_id}/delete")
+async def delete_bot(bot_id: str):
+    """Delete an uploaded custom bot by ID or filename."""
+    # Prevent deleting built-in benchmark bots
+    for b in BUILTIN_AGENTS:
+        if b["id"] == bot_id:
+            raise HTTPException(status_code=403, detail="Cannot delete built-in benchmark bots.")
+
+    uploaded_files = glob.glob(str(UPLOAD_DIR / "*.py"))
+    target_file = None
+    for file_path in uploaded_files:
+        stem = Path(file_path).stem
+        basename = os.path.basename(file_path)
+        if bot_id in (f"uploaded_{stem}", stem, basename):
+            target_file = file_path
+            break
+
+    if not target_file:
+        raise HTTPException(status_code=404, detail=f"Custom bot '{bot_id}' not found or cannot be deleted.")
+
+    try:
+        os.remove(target_file)
+        # Clean up compiled pycache if present
+        pycache_dir = UPLOAD_DIR / "__pycache__"
+        if pycache_dir.exists():
+            for pyc in pycache_dir.glob(f"{Path(target_file).stem}*.pyc"):
+                try:
+                    os.remove(pyc)
+                except Exception:
+                    pass
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete bot file: {e}")
+
+    return {"success": True, "message": f"Bot '{bot_id}' deleted successfully.", "bot_id": bot_id}
+
+
 @app.post("/api/audit")
 async def audit_bot(data: Dict[str, Any]):
     """Run full qualification audit on any specified source or file."""

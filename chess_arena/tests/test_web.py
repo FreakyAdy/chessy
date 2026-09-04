@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import io
 import os
+from pathlib import Path
 import unittest
 from fastapi.testclient import TestClient
 
@@ -113,6 +114,28 @@ class ValidWebBot(ChessAgent):
             self.assertIn("fen", data["data"])
             self.assertIn("standings", data["data"])
 
+    def test_delete_bot_lifecycle(self):
+        # Create a dummy bot in uploaded_agents
+        dummy_path = Path("uploaded_agents/test_unit_del.py")
+        dummy_path.write_text("# dummy test bot", encoding="utf-8")
+        self.assertTrue(dummy_path.exists())
+
+        # Test deleting custom bot
+        resp = self.client.delete("/api/bots/uploaded_test_unit_del")
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp.json().get("success"))
+        self.assertFalse(dummy_path.exists())
+
+        # Test deleting non-existent bot
+        resp_404 = self.client.delete("/api/bots/non_existent_bot_123")
+        self.assertEqual(resp_404.status_code, 404)
+
+    def test_delete_builtin_bot_forbidden(self):
+        # Should forbid deleting built-in agents
+        resp = self.client.delete("/api/bots/greedy")
+        self.assertEqual(resp.status_code, 403)
+
 
 if __name__ == "__main__":
     unittest.main()
+

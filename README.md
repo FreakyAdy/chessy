@@ -5,9 +5,17 @@
 
 **Host real-time AI chess tournaments in a live browser UI, audit custom models across 16 FIDE edge benchmarks, and referee agent matches in isolated sandboxes.**
 
+<br>
+
+<p align="center">
+  <a href="https://chessy-g1di.onrender.com/">
+    <img src="https://img.shields.io/badge/%F0%9F%8C%90%20Live%20Demo-chessy--g1di.onrender.com-00C7B7?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo on Render">
+  </a>
+</p>
+
 [![CI / Quality Gate](https://img.shields.io/badge/CI%20%2F%20Quality%20Gate-passing-brightgreen.svg)](tests/)
 [![Tests Passing](https://img.shields.io/badge/tests-49%2F49%20passed%20(100%25)-brightgreen.svg)](chess_arena/tests/)
-[![Live Web UI](https://img.shields.io/badge/%F0%9F%8C%90%20Web%20UI-FastAPI%20%2B%20WebSockets-brightgreen.svg)](#-live-web-ui--5-bot-uploader)
+[![Live Web UI](https://img.shields.io/badge/%F0%9F%8C%90%20Web%20UI-FastAPI%20%2B%20WebSockets-brightgreen.svg)](https://chessy-g1di.onrender.com/)
 [![Referee Engine](https://img.shields.io/badge/referee-FIDE--compliant-brightgreen.svg)](#-why-chess-arena)
 [![Model Auditor Gate](https://img.shields.io/badge/model%20auditor-verified%20%26%20gated-blue.svg)](#-model-eligibility--qualification-gate-verify_agentpy)
 [![Process Isolation](https://img.shields.io/badge/sandbox-IPC%20subprocess%20isolated-purple.svg)](#-system-architecture)
@@ -16,6 +24,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 <p align="center">
+  <a href="https://chessy-g1di.onrender.com/"><b>🌐 Live Demo App</b></a> •
   <a href="#-quick-demo"><b>⚡ Quick Demo</b></a> •
   <a href="#-live-web-ui--5-bot-tournament-hosting"><b>🌐 Live Web UI</b></a> •
   <a href="#-how-to-build-a-tournament-compliant-bot"><b>🤖 Build a Bot</b></a> •
@@ -42,7 +51,10 @@
 
 ### 1. Host Live Tournaments in the Web UI *(Recommended)*
 
-The primary and recommended way to run tournaments is through the **Live Web UI**. It provides drag-and-drop bot uploading (up to 5 bots), real-time move animations over WebSockets, live telemetry, and an automated leaderboard:
+> [!TIP]
+> **🚀 Official Live Deployment**: Try Chess Arena right now in your browser at **[https://chessy-g1di.onrender.com/](https://chessy-g1di.onrender.com/)** — upload bots, test compliance, manage rosters, and watch live matches with zero local installation!
+
+The primary and recommended way to run tournaments locally is through the **Live Web UI**. It provides drag-and-drop bot uploading (up to 5 bots), instant bot deletion, real-time move animations over WebSockets, live telemetry, and an automated leaderboard:
 
 ```bash
 # Launch the live web server
@@ -142,7 +154,12 @@ $ python main.py --display --delay 0.1
 
 The **Chess Arena Web UI** is the centerpiece of the framework, offering an interactive competition dashboard that mirrors the macOS TrueColor terminal aesthetic.
 
-### Launching the Web Server
+### 🌐 Official Live Cloud Instance
+
+Play immediately without cloning or installing:
+👉 **[https://chessy-g1di.onrender.com/](https://chessy-g1di.onrender.com/)**
+
+### Launching Locally
 
 ```bash
 # Recommended command:
@@ -164,11 +181,12 @@ Then navigate to **`http://127.0.0.1:8000`** in any web browser.
    - One-click copyable FEN state string.
    - Live referee status: Legal move counter, 50-move rule clock, and check status.
    - Scrollable historical move log with timestamps.
-3. **5-Bot Uploader & Instant Eligibility Gate**:
+3. **5-Bot Uploader, Manager & Deletion**:
    - Click **"🤖 Manage Bots"** to open the drag-and-drop modal.
    - Drop up to 5 custom Python bot files (`.py`) into the drop zone.
    - Automatically executes the 16-FEN qualification audit in the background.
    - Instant scorecard displaying eligibility verdict, score, latency, and fix guidelines.
+   - **One-Click Bot Deletion**: Remove obsolete custom bots anytime using the `🗑 Delete` button to free up roster slots.
    - Checkbox roster selector allowing you to pick any 2 to 5 bots for the upcoming bracket.
 4. **Live Playback Controls & Leaderboard**:
    - Start, Pause, Resume, and Stop controls.
@@ -646,6 +664,8 @@ This gives you an instant `https://...` link with full WebSocket support that an
 ---
 
 ### Option 2: 1-Click Cloud Deploy on Render (Free Tier)
+
+> **Official Live Instance**: [https://chessy-g1di.onrender.com/](https://chessy-g1di.onrender.com/)
 
 [Render](https://render.com) natively supports Python FastAPI apps with WebSockets and gives you a free `https://<your-app>.onrender.com` domain with automatic SSL:
 

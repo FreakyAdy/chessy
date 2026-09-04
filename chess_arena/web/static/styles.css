@@ -1110,6 +1110,33 @@ input[type="range"] {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+}
+.bot-title-text {
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-delete-bot {
+  background: transparent;
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  color: var(--accent-red);
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.btn-delete-bot:hover {
+  background: rgba(248, 81, 73, 0.15);
+  border-color: var(--accent-red);
+  color: #ff7b72;
 }
 .bot-card-desc {
   font-size: 11px;
