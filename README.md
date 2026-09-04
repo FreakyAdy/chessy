@@ -8,13 +8,20 @@
 <br>
 
 <p align="center">
+  <em>Any trained model—whether it's <b>PyTorch, ONNX, TensorFlow, Scikit-learn, an RL policy (like Stable-Baselines3), or a pure NumPy neural network</b>—can compete in Chess Arena.<br>
+  As long as the model wraps its inference logic inside the standard <code>ChessAgent</code> contract (<code>get_move(fen, legal_moves)</code>), it can be admitted to tournaments.</em>
+</p>
+
+<br>
+
+<p align="center">
   <a href="https://chessy-g1di.onrender.com/">
     <img src="https://img.shields.io/badge/%F0%9F%8C%90%20Live%20Demo-chessy--g1di.onrender.com-00C7B7?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo on Render">
   </a>
 </p>
 
 [![CI / Quality Gate](https://img.shields.io/badge/CI%20%2F%20Quality%20Gate-passing-brightgreen.svg)](tests/)
-[![Tests Passing](https://img.shields.io/badge/tests-49%2F49%20passed%20(100%25)-brightgreen.svg)](chess_arena/tests/)
+[![Tests Passing](https://img.shields.io/badge/tests-51%2F51%20passed%20(100%25)-brightgreen.svg)](chess_arena/tests/)
 [![Live Web UI](https://img.shields.io/badge/%F0%9F%8C%90%20Web%20UI-FastAPI%20%2B%20WebSockets-brightgreen.svg)](https://chessy-g1di.onrender.com/)
 [![Referee Engine](https://img.shields.io/badge/referee-FIDE--compliant-brightgreen.svg)](#-why-chess-arena)
 [![Model Auditor Gate](https://img.shields.io/badge/model%20auditor-verified%20%26%20gated-blue.svg)](#-model-eligibility--qualification-gate-verify_agentpy)
