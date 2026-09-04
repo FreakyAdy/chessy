@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.git
+.gitignore
+.pytest_cache
+venv
+.venv
+results/*.json
+games/*.pgn

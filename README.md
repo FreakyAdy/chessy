@@ -23,8 +23,9 @@
   <a href="#-why-chess-arena"><b>💡 Why Chess Arena</b></a> •
   <a href="#-model-eligibility--qualification-gate-verify_agentpy"><b>🛡️ Model Eligibility Gate</b></a> •
   <a href="#-benchmark-positions--compliance-matrix"><b>📊 Benchmark Suite</b></a> •
+  <a href="#-deployment--cloud-hosting"><b>🚀 Deployment</b></a> •
   <a href="#-system-architecture"><b>📐 Architecture</b></a> •
-  <a href="#-quick-start"><b>🚀 Quick Start</b></a>
+  <a href="#-quick-start"><b>⚡ Quick Start</b></a>
 </p>
 
 <br>
@@ -615,7 +616,72 @@ chessy/
 ├── web_server.py               # Standalone Web UI server launcher
 ├── main.py                     # Primary tournament CLI & server entry point
 ├── config.yaml                 # Active tournament configuration
+├── Dockerfile                  # Production container definition
+├── render.yaml                 # Render.com 1-click cloud deployment config
 └── requirements.txt            # Python dependencies
+```
+
+---
+
+## 🚀 Deployment & Cloud Hosting
+
+You can deploy `Chess Arena` online so anyone, anywhere can upload bots, run matches, spectate live tournaments, and view leaderboards in their browser without installing anything locally.
+
+### Option 1: Instant Public Access via Tunnel (Free, 10 Seconds)
+
+If you already have Chess Arena running locally (`python main.py --web` or `python web_server.py`) and want to share an instant public link with a friend or test on your mobile device:
+
+```bash
+# Using Cloudflare Tunnels (Zero setup, no account needed):
+npx cloudflared tunnel --url http://127.0.0.1:8000
+
+# Or using Localtunnel:
+npx localtunnel --port 8000
+
+# Or using ngrok:
+ngrok http 8000
+```
+This gives you an instant `https://...` link with full WebSocket support that anyone on the internet can open immediately!
+
+---
+
+### Option 2: 1-Click Cloud Deploy on Render (Free Tier)
+
+[Render](https://render.com) natively supports Python FastAPI apps with WebSockets and gives you a free `https://<your-app>.onrender.com` domain with automatic SSL:
+
+1. Push or fork this repository to your GitHub account.
+2. Log into [Render Dashboard](https://dashboard.render.com/) and click **New + > Web Service**.
+3. Select your GitHub repository.
+4. Render will automatically detect [`render.yaml`](render.yaml) or you can set:
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `python web_server.py`
+5. Click **Create Web Service**. Within ~2 minutes, your live tournament arena will be live on the web!
+
+---
+
+### Option 3: Deploy on Hugging Face Spaces (Free Cloud Tier)
+
+Hugging Face Spaces is an ideal home for AI and chess bot benchmarks:
+
+1. Create a new Space on [Hugging Face Spaces](https://huggingface.co/new-space).
+2. Set Space Name: `chess-arena`.
+3. Select **Docker** (Blank) as the Space SDK.
+4. Clone or push this repository to your Space repository.
+5. Hugging Face will automatically build the included [`Dockerfile`](Dockerfile) and provide a public URL like `https://huggingface.co/spaces/<username>/chess-arena`!
+
+---
+
+### Option 4: Deploy with Docker / VPS (Self-Hosted)
+
+To run in production on any VPS (AWS EC2, DigitalOcean, Hetzner, GCP):
+
+```bash
+# Build the production Docker image:
+docker build -t chess-arena .
+
+# Run container on port 80:
+docker run -d -p 80:8000 --name chess-arena --restart unless-stopped chess-arena
 ```
 
 ---
@@ -624,7 +690,7 @@ chessy/
 
 Contributions are welcome! Whether you are submitting a new heuristic agent, an RL policy adapter, or additional referee test vectors:
 
-1. Build your bot using the [AI Prompt](#-community-ai-prompt-generate-a-bot-in-seconds) or copy [`sample_friend_bot.py`](sample_friend_bot.py).
+1. Build your bot using the [AI Compliance Audit Prompt](#-community-ai-prompt-check-bot-compliance-with-chess-arena-environment) or copy [`sample_friend_bot.py`](sample_friend_bot.py).
 2. Test it locally: `python verify_agent.py <your_file>.py`.
 3. Open a Pull Request with your verified agent and test coverage.
 

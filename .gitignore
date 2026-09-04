@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.venv/
+env/
+venv/
+uploaded_agents/__pycache__/

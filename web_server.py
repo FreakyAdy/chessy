@@ -30,17 +30,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Chess Arena Live Web UI — Real-time match streaming, board visualization & 5-bot uploader"
     )
+    default_host = os.environ.get("HOST", "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1")
+    default_port = int(os.environ.get("PORT", "8000"))
+
     parser.add_argument(
         "--host",
-        default="127.0.0.1",
-        help="Host address to bind (default: 127.0.0.1)",
+        default=default_host,
+        help=f"Host address to bind (default: {default_host})",
     )
     parser.add_argument(
         "--port",
         "-p",
         type=int,
-        default=8000,
-        help="Port to bind (default: 8000)",
+        default=default_port,
+        help=f"Port to bind (default: {default_port})",
     )
     parser.add_argument(
         "--reload",
