@@ -19,7 +19,7 @@
   <a href="#-quick-demo"><b>⚡ Quick Demo</b></a> •
   <a href="#-live-web-ui--5-bot-tournament-hosting"><b>🌐 Live Web UI</b></a> •
   <a href="#-how-to-build-a-tournament-compliant-bot"><b>🤖 Build a Bot</b></a> •
-  <a href="#-community-ai-prompt-generate-a-bot-in-seconds"><b>💬 AI Prompt for Bots</b></a> •
+  <a href="#-community-ai-prompt-check-bot-compliance-with-chess-arena-environment"><b>💬 AI Compliance Audit Prompt</b></a> •
   <a href="#-why-chess-arena"><b>💡 Why Chess Arena</b></a> •
   <a href="#-model-eligibility--qualification-gate-verify_agentpy"><b>🛡️ Model Eligibility Gate</b></a> •
   <a href="#-benchmark-positions--compliance-matrix"><b>📊 Benchmark Suite</b></a> •
@@ -240,51 +240,83 @@ If it prints `ELIGIBLE FOR TOURNAMENT`, your bot is 100% ready to compete!
 
 ---
 
-## 💬 Community AI Prompt (Generate a Bot in Seconds)
+## 💬 Community AI Prompt: Check Bot Compliance with Chess Arena Environment
 
-Want to build a competitive bot using an AI assistant (**ChatGPT, Claude, Gemini, or Cursor**)? Copy and paste the prompt below:
+Before uploading your or your friend's chess bot to **Chess Arena**, you can use **ChatGPT, Claude, Gemini, or Cursor** to audit, debug, and check whether your existing bot code is 100% compliant with our competition environment.
+
+Copy and paste the prompt below into your AI along with your bot's Python code:
 
 <details open>
-<summary><b>📋 Click to copy the AI Prompt for building a compliant Chess Arena bot</b></summary>
+<summary><b>📋 Click to copy the Community AI Environment Compliance Checker Prompt</b></summary>
 
 ```text
-You are an expert Chess AI systems engineer. Build a high-performance, tournament-compliant chess agent in Python for the "Chess Arena" competition framework.
+Act as the Official Chess Arena Environment Compliance Auditor and Referee.
+DO NOT WRITE A NEW BOT FROM SCRATCH. Your objective is to thoroughly AUDIT, TEST, and VERIFY whether my attached Python chess bot code is 100% compliant with the "Chess Arena" competition platform and will pass the automated 16-FEN benchmark qualification gate (verify_agent.py) without crashes, illegal moves, timeouts, or disqualifications.
 
-The agent MUST strictly conform to the following specifications:
+================================================================================
+CHESS ARENA ENVIRONMENT SPECIFICATIONS & CONSTRAINTS:
+================================================================================
+1. RUNTIME EXECUTION ENVIRONMENT:
+   - Python 3.10+ runtime.
+   - The tournament runner executes bot moves inside isolated worker subprocesses (AgentProcess) using IPC pipes.
+   - HARD MOVE TIMEOUT: Exactly 5.00 seconds per move. If an agent does not return a move before the timeout, it forfeits the game by timeout. Recommended average decision time is < 50ms.
+   - The referee validates all moves using python-chess: `chess.Move.from_uci(move) in board.legal_moves`.
 
-1. ARCHITECTURE & IMPORTS:
-   - Inherit from `ChessAgent`:
-     ```python
-     from chess_arena.arena.adapter import ChessAgent
-     import chess
-     ```
-   - Class constructor:
-     ```python
-     def __init__(self, name: str = "CandidateBot", config: dict | None = None) -> None:
-         super().__init__(name=name, config=config or {})
-     ```
-   - Core move method:
-     ```python
-     def get_move(self, fen: str, legal_moves: list[str]) -> str:
-     ```
+2. MANDATORY CLASS CONTRACT & INTERFACE:
+   - Must import: `from chess_arena.arena.adapter import ChessAgent`
+   - Must inherit from `ChessAgent`.
+   - Constructor signature must be:
+     `def __init__(self, name: str = "...", config: dict | None = None) -> None:`
+     and MUST call `super().__init__(name=name, config=config or {})`.
+   - Primary move decision method MUST be:
+     `def get_move(self, fen: str, legal_moves: list[str]) -> str:`
+     * Note: `fen` is the current board state in Forsyth–Edwards Notation.
+     * Note: `legal_moves` is a list of all strictly legal UCI move strings (e.g. ['e2e4', 'g1f3', 'e7e8q']).
 
-2. STRICT RULES & AUDIT CRITERIA:
-   - `legal_moves` is a Python list of UCI strings (e.g. ['e2e4', 'g1f3', 'e7e8q']).
-   - The returned move MUST be a string from `legal_moves`. NEVER return an illegal move.
-   - If `move.promotion` occurs, ensure the UCI string includes the promotion piece character (e.g. 'e7e8q').
-   - Must handle complex FIDE edge cases gracefully: checks, castling, en passant, promotions, pins, and endgames.
-   - Must respond within 5.0 seconds (target average < 50ms).
-   - Must never call `sys.exit()` or raise uncaught exceptions; wrap logic in a try/except fallback that defaults to `legal_moves[0]`.
+3. MOVE FORMAT & FIDE LEGALITY RULES:
+   - RETURN TYPE: Must return a single `str` object. Returning `None`, integers, tuples, or `chess.Move` objects will crash the referee.
+   - NOTATION: Must be lowercase UCI (Universal Chess Interface) format (e.g. 'e2e4', 'g1f3', 'e7e8q'). NEVER return Standard Algebraic Notation / SAN (e.g. 'Nf3', 'O-O', 'Qxd4+') or descriptive notation.
+   - STRICT LEGALITY: The returned string MUST exist in the provided `legal_moves` list under ALL circumstances.
+   - PAWN PROMOTIONS: Any pawn reaching the back rank MUST include the 5th promotion piece character in lowercase (e.g. 'e7e8q', 'e7e8r', 'e7e8b', 'e7e8n'). Returning 4 characters (e.g. 'e7e8') will be rejected as an illegal move and cause immediate forfeiture.
+   - CHECK DEFENSE: When under check, the bot must only return a legal king evasion, blocking move, or attacker capture.
+   - ABSOLUTE PINS: The bot must never attempt to move a pinned piece in any direction that exposes its King to check.
+   - CASTLING & EN PASSANT: Must respect castling rights ('e1g1', 'e1c1', 'e8g8', 'e8c8') and valid en passant capture squares.
 
-3. DESIRED STRATEGY:
-   Implement an intelligent tactical bot that evaluates:
-   - Pawn promotions (prioritizing Queening).
-   - MVV-LVA captures (Most Valuable Victim - Least Valuable Attacker) using standard piece values (P=100, N=320, B=330, R=500, Q=900, K=20000).
-   - Tactical checks and forced checkmates.
-   - Positional center control bonus (e4, d4, e5, d5, c4, f4, c5, f5).
-   - Piece development and king safety.
+4. SUBPROCESS SAFETY & RESILIENCE:
+   - FORBIDDEN CALLS: Never call `sys.exit()`, `os._exit()`, `quit()`, or attempt to terminate the interpreter.
+   - NO BLOCKING I/O: No calls to `input()`, `sleep()` exceeding budget, network sockets, or excessive disk I/O.
+   - FAIL-SAFE FALLBACK: The entire evaluation or search logic must be protected with a broad `try...except` block. If ANY unexpected exception, recursion error, or calculation failure occurs, it must safely fall back:
+     `if legal_moves: return legal_moves[0]`
 
-Please output the complete, self-contained Python file ready to be saved as `my_bot.py` and uploaded to Chess Arena.
+================================================================================
+AUDIT INSTRUCTIONS & REQUIRED OUTPUT FORMAT:
+================================================================================
+Perform a strict static code analysis of the attached bot and provide your response in the following 4 sections:
+
+### 1. ENVIRONMENT COMPLIANCE SCORECARD
+Evaluate each item as [PASS], [WARNING], or [FAIL]:
+- [ ] Module Import & Subclass (`from chess_arena.arena.adapter import ChessAgent`)
+- [ ] Constructor Signature & `super().__init__` Call
+- [ ] Method Signature (`get_move(self, fen: str, legal_moves: list[str]) -> str`)
+- [ ] Return Value Type & UCI Format (lowercase string, no SAN)
+- [ ] Pawn Promotion Compliance (5-character syntax, e.g. 'e7e8q')
+- [ ] Move Legality & Inclusion in `legal_moves`
+- [ ] Subprocess Isolation & Exception Safety (try/except fallback present)
+- [ ] Latency Budget Safety (search depth bounded, no infinite loops)
+
+### 2. QUALIFICATION VERDICT
+State clearly:
+- **STATUS**: [ELIGIBLE FOR TOURNAMENT] or [NON-COMPLIANT / DISQUALIFIED]
+- **COMPLIANCE SCORE**: __ / 100
+
+### 3. DEFICIENCIES & ENVIRONMENT RISKS FOUND
+List any and all syntax errors, API contract deviations, illegal move hazards, promotion flaws, or unhandled exceptions that could cause the bot to fail `verify_agent.py` or be disqualified by the live referee. If none, confirm that the code is clean.
+
+### 4. CERTIFIED COMPLIANT CODE
+If any deficiencies were identified, provide the full, corrected, and certified Python code with all fixes applied, preserving the original strategic intent while ensuring 100% environment compliance.
+
+---
+[ATTACH YOUR BOT PYTHON CODE HERE]
 ```
 
 </details>
