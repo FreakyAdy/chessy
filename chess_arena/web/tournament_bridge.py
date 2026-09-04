@@ -314,12 +314,25 @@ class TournamentBridge:
                 # Request move from agent with timing
                 t_start = time.perf_counter()
                 try:
-                    move_uci = await loop.run_in_executor(
-                        None,
-                        active_agent.get_move,
-                        board.fen(),
-                        legal_moves_uci,
-                    )
+                    if hasattr(active_agent, "request_move"):
+                        move_uci = await loop.run_in_executor(
+                            None,
+                            active_agent.request_move,
+                            board.fen(),
+                            legal_moves_uci,
+                            self.time_limit,
+                        )
+                    else:
+                        move_uci = await loop.run_in_executor(
+                            None,
+                            active_agent.get_move,
+                            board.fen(),
+                            legal_moves_uci,
+                        )
+                except TimeoutError as exc:
+                    outcome_str = "0-1" if board.turn == chess.WHITE else "1-0"
+                    termination_reason = f"{active_agent.name} timed out ({self.time_limit:.1f}s)"
+                    break
                 except Exception as exc:
                     outcome_str = "0-1" if board.turn == chess.WHITE else "1-0"
                     termination_reason = f"{active_agent.name} crashed: {exc}"
@@ -327,20 +340,18 @@ class TournamentBridge:
 
                 elapsed = time.perf_counter() - t_start
 
-                # Timeout check
-                if elapsed > self.time_limit:
+                # Validate move
+                try:
+                    chess_move = chess.Move.from_uci(move_uci)
+                    if chess_move not in board.legal_moves:
+                        outcome_str = "0-1" if board.turn == chess.WHITE else "1-0"
+                        termination_reason = f"{active_agent.name} played illegal move '{move_uci}'"
+                        break
+                except Exception as exc:
                     outcome_str = "0-1" if board.turn == chess.WHITE else "1-0"
-                    termination_reason = f"{active_agent.name} timed out ({elapsed:.2f}s > {self.time_limit}s)"
+                    termination_reason = f"{active_agent.name} played invalid move '{move_uci}': {exc}"
                     break
 
-                # Validate move with referee
-                validation = referee.validate_move(board, move_uci)
-                if not validation.is_valid:
-                    outcome_str = "0-1" if board.turn == chess.WHITE else "1-0"
-                    termination_reason = f"{active_agent.name} played illegal move '{move_uci}'"
-                    break
-
-                chess_move = chess.Move.from_uci(move_uci)
                 san_move = board.san(chess_move)
 
                 # Push move

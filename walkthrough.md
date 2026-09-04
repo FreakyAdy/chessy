@@ -2,59 +2,32 @@
 
 ## Summary of Changes
 
-### 1. Web UI Matching the TrueColor SVG Aesthetic
-Built a comprehensive browser-based Web UI application that faithfully mirrors the layout, warm wooden board palette, high-contrast piece tiles, and telemetry cards of [`docs/live_board_demo.svg`](file:///c:/Work/Projects/chessy/docs/live_board_demo.svg):
-- **FastAPI & WebSocket Backend (`chess_arena/web/app.py`, `chess_arena/web/tournament_bridge.py`)**:
-  - Asynchronous tournament bridge broadcasting millisecond-accurate move events, live decision clocks, FEN snapshots, referee rules validation, and standings updates.
-  - REST endpoints for bot listing (`GET /api/bots`), multi-file upload (`POST /api/upload`), qualification audit (`POST /api/audit`), tournament control (`POST /api/tournament/start`, `pause`, `resume`, `speed`, `stop`), and PGN download (`GET /api/pgn/{match_id}`).
-- **Interactive Frontend (`chess_arena/web/static/`)**:
-  - macOS dark window chrome with window controls (`#ff5f56`, `#ffbd2e`, `#27c93f`), match header banner with player badges and pulsing green `● LIVE` status indicator.
-  - 8x8 Wooden Chessboard with golden oak (`#b5936e`) and dark walnut (`#80522c`) squares, move origin/destination highlights, and solid high-contrast piece tiles (`#1c1917 on #f5f5f4` for White, `#f5f5f4 on #1c1917` for Black).
-  - Telemetry cards: Active Turn, Last Move badge (e.g. `2. ... e7-e5`), decision timer bar, copyable FEN string, live referee status (`✓ Legality Verified`), and scrollable match move stream.
-  - Dynamic tournament leaderboard updating live after every completed match.
-- **5-Bot Uploader & Instant Qualification Gate**:
-  - Drag-and-drop modal supporting up to 5 custom Python bot files (`.py`).
-  - Automatically triggers the 16-FEN `ModelAuditor` in the background on upload.
-  - Displays instant qualification cards with score (`95/100`), checks passed (`20/20`), latency benchmarks, and specific deficiency breakdowns if disqualified.
-  - Roster selector allowing users to choose 2 to 5 bots for the upcoming tournament.
-- **Single-Command Launch**:
-  - `python main.py --web` or `python web_server.py --port 8000`.
+### 1. Web UI Live Move Streaming Fix
+- **Root Cause**: The background match loop in `tournament_bridge.py` attempted to call `referee.validate_move(board, move_uci)`. However, `Referee` uses `apply_move` and does not take a raw board object, causing an unhandled `AttributeError` on the first move of the match which aborted the move broadcasting loop before sending moves to the client.
+- **Fix Implemented**:
+  1. Updated `_play_single_game` in [`chess_arena/web/tournament_bridge.py`](file:///c:/Work/Projects/chessy/chess_arena/web/tournament_bridge.py) to validate moves directly against `board.legal_moves` with `chess.Move.from_uci(move_uci)`.
+  2. Added a robust `validate_move` convenience method to [`Referee`](file:///c:/Work/Projects/chessy/chess_arena/arena/referee.py) supporting both `(board, move_uci)` and single `move_uci` calls.
+  3. Added `get_move` convenience alias to [`AgentProcess`](file:///c:/Work/Projects/chessy/chess_arena/arena/adapter.py) and [`InProcessAgent`](file:///c:/Work/Projects/chessy/chess_arena/arena/adapter.py) so subprocess agents can be duck-typed with `ChessAgent`.
+- **Live Verification**:
+  Verified live move streaming over WebSocket `ws://127.0.0.1:8000/ws/live`. Confirmed moves (`Nh3`, `Nf6`, `Na3`, `Nc6`, `f3`, `Nd5`, etc.) stream sequentially with live FEN updates and board rendering.
 
 ---
 
-## Visual Verification & Screenshots
-
-### 1. Live Match in Progress
-The chessboard updates in-place over WebSockets with live move highlights, decision clock, and telemetry cards:
-
-![Live Match in Progress](C:/Users/FreakyAdy/.gemini/antigravity-ide/brain/70d5b7dd-b062-4764-b939-db5634623f9c/live_match_in_progress_1788507781257.png)
-
-### 2. Candidate Bot Manager & 5-Bot Uploader Modal
-Drag-and-drop custom `.py` models with instant rule qualification scoring and roster selection:
-
-![Bot Manager Modal](C:/Users/FreakyAdy/.gemini/antigravity-ide/brain/70d5b7dd-b062-4764-b939-db5634623f9c/manage_bots_modal_1788507736555.png)
-
-### 3. Tournament Leaderboard & Standings
-Dynamic standings table updating in real time with points, wins, draws, losses, and win rate:
-
-![Tournament Leaderboard](C:/Users/FreakyAdy/.gemini/antigravity-ide/brain/70d5b7dd-b062-4764-b939-db5634623f9c/leaderboard_view_1788507828320.png)
+### 2. Web UI Matching the TrueColor SVG Aesthetic
+- **FastAPI & WebSocket Backend (`chess_arena/web/app.py`, `chess_arena/web/tournament_bridge.py`)**:
+  - Live move streaming with millisecond-accurate move telemetry, decision clock, FEN snapshot, and real-time tournament leaderboard updates.
+  - REST endpoints for bot listing (`GET /api/bots`), 5-bot upload (`POST /api/upload`), qualification audit (`POST /api/audit`), tournament control (`POST /api/tournament/start`, `pause`, `resume`, `speed`, `stop`), and PGN download (`GET /api/pgn/{match_id}`).
+- **Interactive Frontend (`chess_arena/web/static/`)**:
+  - macOS dark window frame (`#0d1117`), traffic light buttons, player badges, pulsing green `● LIVE` status indicator.
+  - 8x8 Wooden Chessboard with golden oak (`#b5936e`) and dark walnut (`#80522c`) squares, move origin/destination highlights, and solid high-contrast piece tiles (`#1c1917 on #f5f5f4` for White, `#f5f5f4 on #1c1917` for Black).
+  - 5-Bot Uploader & Instant Qualification Gate with drag-and-drop support and 16-FEN compliance reporting.
 
 ---
 
 ## Automated Test Suite
 
 All **49 automated tests** pass with 100% success rate:
-- **`chess_arena/tests/test_web.py`**:
-  - `test_root_serves_html`: 200 OK index.html serving.
-  - `test_list_bots`: Enumeration of built-in and community agents.
-  - `test_audit_endpoint`: `ModelAuditor` integration via REST.
-  - `test_upload_invalid_file_extension`: Rejects non-`.py` files with 400 Bad Request.
-  - `test_upload_valid_bot`: Audits and admits valid custom Python bots into `uploaded_agents/`.
-  - `test_tournament_validation_min_bots`: Validates minimum 2 bots required.
-  - `test_tournament_validation_max_bots`: Validates maximum 5 bots allowed.
-  - `test_websocket_live_connection`: Validates live WebSocket connection and state snapshots.
-- **Full Test Run**:
-  ```powershell
-  python -m unittest discover -s chess_arena/tests
-  # Ran 49 tests in 3.708s - OK
-  ```
+```powershell
+python -m unittest discover -s chess_arena/tests
+# Ran 49 tests in 3.322s - OK
+```

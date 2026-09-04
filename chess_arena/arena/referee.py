@@ -130,6 +130,21 @@ class Referee:
         self._move_log.append(result)
         return result
 
+    def validate_move(self, move_or_board: Any, maybe_move: Optional[str] = None) -> Any:
+        """Convenience method to check move validity without throwing."""
+        if maybe_move is not None:
+            uci_move = maybe_move
+            board = move_or_board
+            try:
+                m = chess.Move.from_uci(uci_move)
+                b = board.inner if hasattr(board, "inner") else board
+                return type("ValidationResult", (), {"is_valid": m in b.legal_moves})()
+            except Exception:
+                return type("ValidationResult", (), {"is_valid": False})()
+        else:
+            res = self.apply_move(move_or_board)
+            return type("ValidationResult", (), {"is_valid": res.validity == MoveValidity.LEGAL, "result": res})()
+
     # ── Query helpers ────────────────────────────────────────────────────
     def current_status(self) -> GameStatus:
         """Evaluate the game status for the **current** position."""

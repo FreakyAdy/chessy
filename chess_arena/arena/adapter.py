@@ -230,6 +230,10 @@ class AgentProcess:
             )
         return payload  # the UCI move string
 
+    def get_move(self, fen: str, legal_moves: list[str]) -> str:
+        """Convenience alias conforming to ChessAgent interface."""
+        return self.request_move(fen, legal_moves)
+
     def is_alive(self) -> bool:
         if self._process is None:
             return False
@@ -278,6 +282,10 @@ class InProcessAgent:
         legal_moves: list[str],
         timeout: float = 5.0,
     ) -> str:
+        return self._agent.get_move(fen, legal_moves)
+
+    def get_move(self, fen: str, legal_moves: list[str]) -> str:
+        """Convenience alias conforming to ChessAgent interface."""
         return self._agent.get_move(fen, legal_moves)
 
     def is_alive(self) -> bool:
