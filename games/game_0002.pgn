@@ -1,0 +1,11 @@
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0002"]
+[White "GreedyBot"]
+[Black "RandomBot"]
+[Result "1/2-1/2"]
+[Termination "STALEMATE"]
+
+1. c4 a6 2. b3 c6 3. Bb2 h6 4. Bxg7 e5 5. Bxh8 Qc7 6. Bxe5 Qxe5 7. Nf3 Ke7 8. Nxe5 h5 9. Nxc6+ Ke8 10. Nxb8 Nh6 11. Nxd7 Ba3 12. Nxa3 Bxd7 13. Nb1 Ng8 14. f4 Rc8 15. g3 Rd8 16. h3 Bxh3 17. Bxh3 Rb8 18. Kf2 b5 19. cxb5 Kf8 20. bxa6 Rc8 21. Bxc8 Kg7 22. Rxh5 Kg6 23. d4 Nf6 24. Bh3 Kg7 25. Re5 Nd5 26. Rxd5 Kf8 27. Rd6 Kg7 28. Qg1 Kg8 29. Rg6+ fxg6 30. Qe1 Kh7 31. Bg4 Kh6 32. e4 Kg7 33. Nc3 Kh7 34. Bh3 Kh6 35. Bf5 g5 36. fxg5+ Kxg5 37. a4 Kh5 38. g4+ Kh6 39. Kf1 Kg5 40. Ke2 Kh6 41. Qd1 Kg5 42. Nb5 Kh6 43. Qg1 Kg5 44. Qf2 Kh6 45. Bh7 Kg5 46. Ra2 Kh6 47. a5 Kg7 48. Rd2 Kh8 49. d5 Kxh7 50. Rc2 Kh8 51. Rc6 Kh7 52. Rc8 Kg7 53. Rf8 Kh7 54. Qc5 Kh6 55. Qc3 Kg6 56. Nd4 Kg5 57. Qc6 Kh4 58. Kd1 Kg3 59. g5 Kh3 60. Rh8+ Kg4 61. Nb5 Kf3 62. Qc1 Kg3 63. Rd8 Kh3 64. g6 Kg4 65. Qc5 Kf4 66. Rf8+ Kxe4 67. d6 Kd3 68. Rf4 1/2-1/2
+

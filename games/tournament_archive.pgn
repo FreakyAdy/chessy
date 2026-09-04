@@ -1,0 +1,260 @@
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0001"]
+[White "RandomBot"]
+[Black "GreedyBot"]
+[Result "1/2-1/2"]
+[Termination "STALEMATE"]
+
+1. d3 c5 2. Nf3 f5 3. Nd4 cxd4 4. Nd2 g5 5. e3 dxe3 6. f4 exd2+ 7. Kf2 dxc1=Q 8. Qg4 fxg4 9. b3 Qxa1 10. Rg1 Qxf1+ 11. Kg3 Qxg1 12. Kxg4 gxf4 13. Kf3 Qxg2+ 14. Kxg2 Qc7 15. c3 Qxc3 16. a3 Qxb3 17. Kh3 Qxa3 18. Kg4 Qxd3 19. h3 Qxh3+ 20. Kg5 Qh1 21. Kxf4 Qf1+ 22. Kg4 Qh1 23. Kg5 Qd1 24. Kf4 Qd3 25. Ke5 d6+ 26. Kf4 Bh3 27. Kg5 Bg2 28. Kg4 Bf1 29. Kh5 e5 30. Kg5 Qd2+ 31. Kf5 Nf6 32. Kxf6 Bg2 33. Kf5 Ke7 34. Kg4 Bh3+ 35. Kf3 Qd1+ 36. Ke3 a6 37. Kf2 Qh1 38. Kg3 Qa1 39. Kf3 Bc8 40. Ke3 Qa2 41. Kf3 b6 42. Ke3 Qb3+ 43. Ke4 Qe3+ 44. Kd5 Qc5+ 45. Ke4 Qc6+ 46. Kd3 d5 47. Ke2 Qc7 48. Kd1 Qd6 49. Kc1 Ke8 50. Kd1 Bh6 51. Kc2 Qd8 52. Kc3 Rg8 53. Kd3 Rg1 54. Kc3 Nd7 55. Kb4 Bc1 56. Ka4 Rh1 57. Kb4 a5+ 58. Ka4 b5+ 59. Kb3 Nc5+ 60. Kc3 Ra7 61. Kc2 Rd7 62. Kc3 Rh6 63. Kc2 Kf8 64. Kxc1 Re6 65. Kc2 Qb6 66. Kb2 Rde7 67. Kc2 a4 68. Kb2 Na6 69. Kb1 Qg1+ 70. Ka2 Nb8 71. Kb2 Rd7 72. Ka2 Qa1+ 73. Kxa1 Nc6 74. Kb2 Ke7 75. Ka2 Ra7 76. Ka3 Bd7 77. Kb2 Bc8 78. Kc1 Kf7 79. Kd2 Nd8 80. Kc1 Rc7+ 81. Kd1 b4 82. Kd2 Kg6 83. Ke3 Kh5 84. Kf2 Rd6 85. Kg2 Nb7 86. Kg3 d4 87. Kg2 Rc4 88. Kg3 Rg6+ 89. Kf3 Rc3+ 90. Kf2 Be6 91. Ke2 Nd6 92. Ke1 Rc7 93. Kd1 b3 94. Ke2 Bg4+ 95. Ke1 Kh6 96. Kf1 Rc2 97. Ke1 Rc8 98. Kd2 Nb7 99. Ke1 Rg5 100. Kf2 Rd8 101. Kg1 e4 102. Kf2 Bf5 103. Ke2 Rd5 104. Kf2 Rg4 105. Ke1 b2 106. Ke2 Rg1 107. Kf2 b1=Q 108. Ke2 Ra5 109. Kd2 Rg4 110. Ke2 Kg5 111. Kd2 Qa2+ 112. Ke1 Rb5 113. Kf1 Qf7 114. Kf2 Qc7 115. Kf1 Bc8 116. Kf2 Qd7 117. Ke2 a3 118. Ke1 Nd8 119. Kd2 Kf4 120. Ke2 Qf7 121. Kf2 Rb8 122. Kf1 Rg1+ 123. Kf2 Rg4 124. Ke2 Qc4+ 125. Kd1 Kf5 126. Kd2 Qc7 127. Ke1 Ba6 128. Kd2 Qd6 129. Kc2 Rg1 130. Kd2 Qd7 131. Kc2 Rg7 132. Kd2 Qe6 133. Ke1 Qa2 134. Kd1 Qg2 135. Kc1 Ra7 136. Kd1 h5 137. Ke1 Rb4 138. Kd1 Qh1+ 139. Kd2 Qh2+ 140. Kc1 Qh4 141. Kc2 Bd3+ 142. Kc1 Rba4 143. Kd1 R7a6 144. Kd2 Nb7 145. Kc1 Rh6 146. Kd1 Bc2+ 147. Kd2 Nd6 148. Kc1 Ra6 149. Kd2 Nc4+ 150. Kxc2 Kf4 151. Kb1 Qe1+ 152. Ka2 Qc3 153. Kb1 Qc2+ 154. Ka1 Qc3+ 155. Kb1 Rh8 156. Ka2 Rd8 157. Kb1 Nb2 158. Ka2 h4 159. Ka1 Qe1+ 160. Ka2 Qf2 161. Kb1 Rc6 162. Ka1 a2 163. Kxa2 Rc3 164. Kb1 Qd2 165. Ka1 Nc4 166. Kb1 Qc1+ 167. Ka2 Rf3 1/2-1/2
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0002"]
+[White "GreedyBot"]
+[Black "RandomBot"]
+[Result "1/2-1/2"]
+[Termination "STALEMATE"]
+
+1. c4 a6 2. b3 c6 3. Bb2 h6 4. Bxg7 e5 5. Bxh8 Qc7 6. Bxe5 Qxe5 7. Nf3 Ke7 8. Nxe5 h5 9. Nxc6+ Ke8 10. Nxb8 Nh6 11. Nxd7 Ba3 12. Nxa3 Bxd7 13. Nb1 Ng8 14. f4 Rc8 15. g3 Rd8 16. h3 Bxh3 17. Bxh3 Rb8 18. Kf2 b5 19. cxb5 Kf8 20. bxa6 Rc8 21. Bxc8 Kg7 22. Rxh5 Kg6 23. d4 Nf6 24. Bh3 Kg7 25. Re5 Nd5 26. Rxd5 Kf8 27. Rd6 Kg7 28. Qg1 Kg8 29. Rg6+ fxg6 30. Qe1 Kh7 31. Bg4 Kh6 32. e4 Kg7 33. Nc3 Kh7 34. Bh3 Kh6 35. Bf5 g5 36. fxg5+ Kxg5 37. a4 Kh5 38. g4+ Kh6 39. Kf1 Kg5 40. Ke2 Kh6 41. Qd1 Kg5 42. Nb5 Kh6 43. Qg1 Kg5 44. Qf2 Kh6 45. Bh7 Kg5 46. Ra2 Kh6 47. a5 Kg7 48. Rd2 Kh8 49. d5 Kxh7 50. Rc2 Kh8 51. Rc6 Kh7 52. Rc8 Kg7 53. Rf8 Kh7 54. Qc5 Kh6 55. Qc3 Kg6 56. Nd4 Kg5 57. Qc6 Kh4 58. Kd1 Kg3 59. g5 Kh3 60. Rh8+ Kg4 61. Nb5 Kf3 62. Qc1 Kg3 63. Rd8 Kh3 64. g6 Kg4 65. Qc5 Kf4 66. Rf8+ Kxe4 67. d6 Kd3 68. Rf4 1/2-1/2
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0003"]
+[White "RandomBot"]
+[Black "CenterBot"]
+[Result "1/2-1/2"]
+[Termination "DRAW (threefold repetition)"]
+
+1. d3 e5 2. Bg5 Bd6 3. Kd2 Nf6 4. Nf3 O-O 5. Ke3 Nc6 6. Ne1 e4 7. d4 Nxd4 8. b4 Nd5+ 9. Kxd4 Qxg5 10. Kxe4 Qe5+ 11. Kd3 Qxa1 12. Kd2 Qd4+ 13. Kc1 Qxd1+ 14. Kb2 Be5+ 15. Kb3 Bd4 16. Nf3 Be5 17. h3 Bd4 18. Ng1 Qxf1 19. Na3 Be5 20. Nb1 Bd4 21. a4 Be5 22. Ka2 Bd4 23. Nc3 Bxc3 24. Rh2 Bd4 25. f3 Be5 26. Rh1 Bd4 27. g3 Be5 28. Ka3 Bd4 29. e3 Bxe3 30. Rh2 Bd4 31. Rh1 Be5 32. Kb3 Bd4 33. c3 Be5 34. a5 Bd4 35. Ka3 Be5 36. Ka4 Bd4 37. a6 Be5 38. f4 Bd4 39. Rh2 Qxf4 40. Rh1 Qe4 41. Kb5 Qxh1 42. Kc4 Be5 43. Kc5 Qe4 44. axb7 Bd4+ 45. Kb5 Bxb7 46. Ne2 Qe5 47. c4 Qe4 48. c5 Qe5 49. h4 Bxc5 50. Nc1 Qd4 51. Nb3 Qe5 52. Kc4 Qe4+ 53. Kxc5 Qe5 54. Nc1 Qd4+ 55. Kb5 Qe5 56. h5 Qe4 57. Kc5 Qd4+ 58. Kb5 Qe4 59. Ne2 Qe5 60. Nc3 Qe4 61. Nb1 Qe5 62. Nd2 Qd4 63. h6 Qe4 64. Ka5 Qd4 65. Kb5 Qe5 66. g4 Qd4 67. g5 Qe4 68. g6 Qd4 69. Nf1 Qe4 70. Nh2 Qd4 71. hxg7 Qe4 72. gxf8=R+ Kxf8 73. gxf7 Qd4 74. Nf1 Qe5 75. Ka5 Qd4 76. Nd2 Qe5 77. Nf3 Qe4 78. Ne1 Qd4 79. Nd3 Qxd3 80. b5 Qe4 81. b6 Qd4 82. bxa7 Qe4 83. Kb5 Qe5 84. Ka5 Qe4 85. Kb5 Qe5 86. Kc5 Qd4+ 87. Kxd4 Nf4 88. Kc3 Bd5 89. Kd4 Be4 90. Ke3 d5 91. Kd2 d4 92. Kc1 Nd5 93. Kb2 c5 94. Ka2 d3 95. Ka1 c4 96. Kb2 Bf5 97. Ka2 Be4 98. Ka3 Ne3 99. Kb2 Bd5 100. Kc3 Be4 101. Kb2 Bd5 102. Kb1 Be4 103. Kc1 Nd5 104. Kd2 Ne3 105. Ke1 Bd5 106. Kf2 Be4 107. Ke1 Bd5 108. Kf2 Be4 109. Kg1 Bd5 110. Kh2 Be4 111. Kg1 Nd5 112. Kh2 Bf5 113. Kg2 Be4+ 114. Kg1 Bf5 115. Kf2 Be4 116. Kf1 Nf4 117. Ke1 Bd5 118. Kf1 Be4 119. Kf2 Bd5 120. Ke3 Be4 121. Kd2 Bd5 122. Kc3 Be4 123. Kxc4 Nd5 124. Kc5 Bf5 125. Kb5 Be4 126. Ka6 Nf4 127. Kb5 Bd5 128. Ka6 Be4 129. Ka5 Bd5 130. Kb5 Be4 131. Ka5 Bd5 132. Kb6 Be4 133. Kb5 Bd5 134. Ka4 Be4 135. Ka5 1/2-1/2
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0004"]
+[White "CenterBot"]
+[Black "RandomBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. d4 b5 2. Be3 f6 3. Nc3 Bb7 4. Ne4 Bc6 5. d5 Na6 6. dxc6 f5 7. Qd4 f4 8. O-O-O b4 9. Nf3 Rb8 10. Bxf4 Rb7 11. cxb7 e6 12. b8=B Nxb8 13. Ne5 Be7 14. Qd5 a6 15. Qd4 Bh4 16. Qd5 Bg5 17. Rd4 c5 18. Qxe6+ Ne7 19. Rd5 Qc7 20. Nxc5 Qxc5 21. Rxc5 Bh6 22. e4 b3 23. Bc4 Nc6 24. Nxc6 Bxf4+ 25. Kb1 Be5 26. Rxe5 Rf8 27. Nd4 g6 28. Bd5 g5 29. Qd6 bxc2+ 30. Kxc2 g4 31. Rf5 Ng8 32. Qxf8# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0005"]
+[White "RandomBot"]
+[Black "MinimaxBot-D2"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. a3 Nf6 2. e4 Nxe4 3. f3 Nc5 4. Qe2 Nc6 5. Qd3 Nxd3+ 6. Kd1 Nxc1 7. Nh3 Nb3 8. c3 Nxa1 9. f4 Nb3 10. Kc2 Nc5 11. Ng5 f6 12. b4 fxg5 13. Rg1 Ne4 14. d3 Nd6 15. Kd1 gxf4 16. g4 fxg3 17. b5 Nxb5 18. Rg2 gxh2 19. Rg5 h1=Q 20. Rf5 Nxc3+ 21. Nxc3 Nd4 22. Na4 Nxf5 23. Nb2 Qxf1+ 24. Kd2 Qg2+ 25. Ke1 Qxb2 26. Kd1 Qxa3 27. Kc2 Nd4+ 28. Kb1 Qxd3+ 29. Ka1 Qa6+ 30. Kb1 Qf1+ 31. Kb2 Qf6 32. Ka3 Qe5 33. Ka4 Qe6 34. Ka5 Rg8 35. Ka4 Qc4+ 36. Ka5 Nb3# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0006"]
+[White "MinimaxBot-D2"]
+[Black "RandomBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nf3 e5 2. Nxe5 h5 3. Nc3 Bb4 4. Nd5 Rh6 5. Nxb4 g6 6. Nd5 g5 7. Rb1 h4 8. Rg1 Rd6 9. Ne3 Re6 10. Nxf7 Nc6 11. Nxd8 Nb4 12. Nxe6 b6 13. Nxc7+ Kf8 14. Nxa8 Na6 15. Nd5 Ne7 16. Nxe7 b5 17. Nxc8 Kg8 18. Nxa7 d5 19. Nxb5 Kh7 20. Nb6 Nc7 21. Nxc7 h3 22. gxh3 g4 23. Rxg4 Kh8 24. Ncxd5 Kh7 25. Nc4 Kh6 26. Ne5 Kh7 27. Rc4 Kh6 28. Rh4+ Kg5 29. Rg4+ Kh6 30. Rg3 Kh7 31. Rf3 Kg8 32. Bg2 Kg7 33. Rd3 Kf8 34. Be4 Ke8 35. Rf3 Kd8 36. Rf8# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0007"]
+[White "RandomBot"]
+[Black "MinimaxBot-D3"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. Na3 Nf6 2. g4 Nxg4 3. b4 Nc6 4. Nc4 Nxb4 5. Na5 Ne5 6. Nc4 Nxc4 7. a4 Rb8 8. Rb1 Na2 9. Bg2 b6 10. Bb2 Nb4 11. c3 Na2 12. Bc6 dxc6 13. f3 Nxd2 14. Nh3 Nxf3+ 15. exf3 Qxd1+ 16. Kf2 Qc2+ 17. Ke1 Qxb1+ 18. Bc1 Qxc1+ 19. Kf2 Qxh1 20. Ke2 Nxc3+ 21. Ke3 Bxh3 22. f4 Qxh2 23. f5 Rd8 24. f6 Rd6 25. a5 e6 26. Kf3 Bf5 27. a6 Na4 28. Ke3 Kd7 29. Kf3 gxf6 30. Ke3 Rd5 31. Kf3 Be7 32. Ke3 Rd2 33. Kf3 Nc5 34. Ke3 Qe2+ 35. Kf4 Nb7 36. axb7 e5+ 37. Kg3 Qh2+ 38. Kf3 Rf2+ 39. Ke3 Qf4# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0008"]
+[White "MinimaxBot-D3"]
+[Black "RandomBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nf3 d6 2. Ng5 Na6 3. Nc3 d5 4. Rb1 Nb8 5. Rg1 Na6 6. Rh1 d4 7. Nce4 h6 8. Nf3 Bd7 9. Ne5 Be6 10. e3 c5 11. Bb5+ Qd7 12. Nxd7 c4 13. Nb6+ Bd7 14. Bxd7+ Kd8 15. Nxa8 e6 16. Bb5 Nf6 17. Nxf6 Nc7 18. Nxc7 Be7 19. Nfe8 Rf8 20. exd4 g5 21. Bxc4 e5 22. dxe5 Rg8 23. Bxf7 h5 24. Bxg8 b5 25. Qxh5 Bd6 26. Qxg5+ Kd7 27. Qg4+ Ke7 28. Nxd6 b4 29. Qc8 a5 30. Nd5# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0009"]
+[White "GreedyBot"]
+[Black "CenterBot"]
+[Result "1/2-1/2"]
+[Termination "DRAW (insufficient material)"]
+
+1. f4 Nc6 2. Nh3 e5 3. fxe5 Bd6 4. exd6 Ne5 5. dxc7 d5 6. cxd8=Q+ Kxd8 7. a4 Be6 8. b3 d4 9. g3 Nf6 10. c4 Nd5 11. cxd5 Bxd5 12. Ba3 Bxh1 13. Qc1 Bd5 14. g4 Be4 15. Kd1 Bd5 16. Qc8+ Rxc8 17. Ng5 Be4 18. Nxe4 Rc4 19. bxc4 Nxc4 20. Bf8 Ne5 21. Bxg7 d3 22. Bxh8 Nc4 23. exd3 Ne5 24. Bxe5 f5 25. gxf5 Ke7 26. Ng5 a5 27. Nxh7 Kf7 28. Bb2 Ke7 29. Kc1 Kd6 30. h4 Kd5 31. Bh8 Kc5 32. Nf6 Kd4 33. Ra3 Ke5 34. Ng4+ Kd5 35. Bf6 Kc5 36. Bc3 Kd5 37. Bxa5 Kd4 38. Bh3 Kd5 39. Rb3 Kd4 40. Rxb7 Kd5 41. Nh2 Ke5 42. Kb2 Kd4 43. f6 Ke5 44. Na3 Kd4 45. Kb1 Kxd3 46. Bc7 Kd4 47. Be6 Ke4 48. Rb8 Kd4 49. Ba2 Ke4 50. Rb4+ Kf5 51. Nc2 Kxf6 52. Rb3 Ke6 53. Rh3+ Kf5 54. Na1 Ke4 55. Bc4 Kd4 56. Rg3 Kxc4 57. Rg8 Kd5 58. Rg5+ Kd4 59. h5 Ke4 60. h6 Kd4 61. Rf5 Ke4 62. Rg5 Kd4 63. Rb5 Ke4 64. Bd6 Kd4 65. Kb2 Ke4 66. Ka2 Kd4 67. Rc5 Ke4 68. Rb5 Kd4 69. Rc5 Ke4 70. Rc3 Kd4 71. Rd3+ Kxd3 72. Nf3 Ke4 73. Be5 Kd5 74. Nh4 Kxe5 75. h7 Kd4 76. h8=B+ Ke4 77. Nf5 Kxf5 78. a5 Ke4 79. Bd4 Kxd4 80. Kb2 Ke4 81. Ka2 Ke5 82. Kb1 Kd5 83. d4 Kxd4 84. Kc2 Ke5 85. Nb3 Ke4 86. Nd4 Kxd4 87. Kb1 Kd5 88. Ka1 Ke5 89. Ka2 Kd5 90. Kb1 Kd4 91. Kc2 Ke4 92. Kd1 Kd4 93. Kd2 Ke5 94. Kc1 Kd4 95. Kb1 Ke5 96. Kb2 Ke4 97. Kc3 Kd5 98. Kb2 Ke5 99. Ka3 Kd4 100. Ka2 Ke4 101. a6 Kd4 102. a7 Kd5 103. Kb3 Ke5 104. a8=N 1/2-1/2
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0010"]
+[White "CenterBot"]
+[Black "GreedyBot"]
+[Result "1/2-1/2"]
+[Termination "DRAW (insufficient material)"]
+
+1. Nf3 d5 2. Nc3 Nf6 3. Nxd5 Nxd5 4. e4 b6 5. exd5 Qxd5 6. Bc4 Qxc4 7. Nd4 Qxd4 8. O-O Qxf2+ 9. Kxf2 f6 10. d4 c5 11. Be3 cxd4 12. Qxd4 Bf5 13. Qe4 Bxe4 14. Bd4 Bxg2 15. Kxg2 Kd7 16. Be5 fxe5 17. Rxf8 Rxf8 18. c4 Rh8 19. c5 bxc5 20. Kf3 e4+ 21. Kxe4 Ke6 22. Ke3 Rc8 23. Ke4 Kf6 24. Kd5 g5 25. Ke4 Kf7 26. Ke5 a6 27. Kd5 Kf6 28. Ke4 Nd7 29. Kd5 Rg8 30. Ke4 h6 31. Kd5 Rgc8 32. Ke4 Nb6 33. Kd3 a5 34. Ke4 Nd7 35. Kd5 Rf8 36. Ke4 e5 37. Kd5 Nb8 38. Kxc5 Kg7 39. Kd5 Rf4 40. Kxe5 Rg4 41. Kd5 Rg2 42. Ke4 Rxb2 43. Kd4 Rxa2 44. Rxa2 Kf6 45. Ke4 Nd7 46. Kd4 a4 47. Kd5 Nf8 48. Kd4 g4 49. Ke4 h5 50. Kd4 Ke7 51. Ke5 Kd7 52. Kd4 Rb8 53. Ke4 Re8+ 54. Kd5 Re5+ 55. Kxe5 Ne6 56. Ke4 Kc8 57. Kd5 Nc5 58. Kxc5 Kd8 59. Kd5 Kd7 60. Ke4 a3 61. Ke5 Kd8 62. Kd4 Kc7 63. Ke4 Kc6 64. Kd4 Kd7 65. Kd5 Ke8 66. Ke4 Ke7 67. Ke5 h4 68. Ke4 g3 69. Ke5 gxh2 70. Ke4 Ke6 71. Kd4 h1=B 72. Kc5 Ke5 73. Kc4 Bd5+ 74. Kc5 Bxa2 75. Kc6 Bf7 76. Kc5 Bd5 77. Kb5 Bf3 78. Kc5 Ke4 79. Kc4 Kf4 80. Kd4 Kg4 81. Ke5 Kh3 82. Kd4 Bd1 83. Ke5 Bb3 84. Kd4 Bf7 85. Ke4 Kg3 86. Ke5 Bb3 87. Kd4 Bc2 88. Ke5 Kg2 89. Kd5 Kh2 90. Ke5 Kg1 91. Kd4 Be4 92. Kxe4 Kh2 93. Kd4 Kh1 94. Ke5 h3 95. Ke4 Kh2 96. Kd5 Kg1 97. Ke4 h2 98. Kd5 Kg2 99. Ke5 Kh1 100. Kd4 Kg1 101. Kd5 h1=Q+ 102. Ke5 Qh6 103. Kd5 a2 104. Ke4 Kf2 105. Kd5 Qg5+ 106. Kd4 Qg4+ 107. Kd5 Qg6 108. Ke5 Qe8+ 109. Kd5 Qe6+ 110. Kxe6 Kf1 111. Kd5 Ke1 112. Ke5 Ke2 113. Kd4 Kf3 114. Kd5 Kf4 115. Kd4 Kf5 116. Kd5 Kg5 117. Kd4 Kg6 118. Kd5 a1=N 1/2-1/2
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0011"]
+[White "GreedyBot"]
+[Black "MinimaxBot-D2"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. f3 Nf6 2. b3 Nc6 3. e4 Nd4 4. Be2 Nxe2 5. Kxe2 Rg8 6. Ba3 Rh8 7. Bxe7 Qxe7 8. Nh3 Nd5 9. Qc1 Kd8 10. Kf1 Nf6 11. Ke1 Nd5 12. Qa3 Qxa3 13. Nxa3 Bxa3 14. exd5 Re8+ 15. Kd1 Bb4 16. Nf4 Ba5 17. Ne2 Re5 18. Nf4 Rf5 19. d4 Rxf4 20. Rc1 Rxd4+ 21. Ke2 Rxd5 22. g4 Rd6 23. Rb1 Bb6 24. Rhf1 Rh6 25. Rfc1 Rxh2+ 26. Kd1 Bc5 27. Rb2 Bf8 28. a4 Rh1+ 29. Kd2 Rh2+ 30. Kc3 Re2 31. Ra1 Re8 32. b4 Re6 33. Kd4 Rf6 34. a5 Rxf3 35. a6 Rf4+ 36. Kd3 Rf3+ 37. Kd4 Rf4+ 38. Kc3 Rf3+ 39. Kc4 Rf4+ 40. Kb3 Rxb4+ 41. Ka3 Rxg4+ 42. Kb3 Rg3+ 43. Ka4 bxa6 44. Ka5 Rc3 45. Rg1 Ra3# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0012"]
+[White "MinimaxBot-D2"]
+[Black "GreedyBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nf3 c5 2. Nc3 a5 3. Ne5 a4 4. Nd5 a3 5. bxa3 Rxa3 6. Bxa3 g6 7. Bxc5 b6 8. Be3 Nh6 9. Bxh6 Bxh6 10. d3 b5 11. Rb1 Rg8 12. Rxb5 Rh8 13. Rxb8 Be3 14. Nxe3 e6 15. Kd2 Ba6 16. Rxd8+ Kxd8 17. Nxf7+ Kc8 18. Nxh8 Bxd3 19. Kxd3 h6 20. Nxg6 e5 21. Nxe5 Kb8 22. Nxd7+ Kc7 23. Ne5 Kb8 24. Nd5 Ka7 25. Qb1 h5 26. Qc1 Kb8 27. Qg5 Kb7 28. Qxh5 Ka6 29. Kd2 Kb5 30. Qh4 Ka5 31. Qg4 Kb5 32. Kc1 Kc5 33. Qf3 Kd6 34. Qe4 Kc5 35. Kb1 Kd6 36. Ka1 Ke6 37. Qd4 Kf5 38. Kb2 Kg5 39. Qd3 Kh6 40. Qg6# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0013"]
+[White "GreedyBot"]
+[Black "MinimaxBot-D3"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. e3 Nf6 2. Qf3 Nc6 3. Qxc6 dxc6 4. Kd1 Bg4+ 5. Ne2 Ne4 6. f4 Nf2+ 7. Ke1 Nxh1 8. c3 Qd3 9. Na3 Bxe2 10. Bxe2 Qe4 11. Nb5 cxb5 12. Bxb5+ Kd8 13. d3 Qxg2 14. b4 Qg1+ 15. Ke2 Nf2 16. Bb2 Qxh2 17. Rc1 Ne4+ 18. Kd1 Qd2# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0014"]
+[White "MinimaxBot-D3"]
+[Black "GreedyBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nf3 c6 2. Ne5 f6 3. Ng4 b6 4. Nc3 c5 5. Nd5 g5 6. Nge3 b5 7. Nf5 Kf7 8. Rb1 h6 9. Rg1 c4 10. Nd4 e6 11. Ne3 f5 12. Nxb5 a5 13. Nxc4 f4 14. Ne5+ Kf6 15. Ng4+ Kg6 16. Ne5+ Kg7 17. Nd4 Ba6 18. Rh1 Bxe2 19. Bxe2 Qe7 20. Bf3 h5 21. Bxa8 h4 22. Ng4 Kf7 23. Ne5+ Kf6 24. Qe2 d6 25. Ng4+ Kf7 26. Nxe6 Qxe6 27. Qxe6+ Kxe6 28. d3 a4 29. Bd2 Rh7 30. Be4 Be7 31. Bxh7 Kf7 32. Kd1 Nd7 33. Re1 Kf8 34. Ba5 Bd8 35. Bxd8 f3 36. gxf3 h3 37. Bxg5 Ne7 38. Bxe7+ Kf7 39. Bxd6 Nf8 40. Re7# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0015"]
+[White "CenterBot"]
+[Black "MinimaxBot-D2"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. d4 Nc6 2. Be3 Nf6 3. d5 Ne5 4. Qd4 Nxd5 5. Qxd5 Ng6 6. Qe5 Nxe5 7. Nf3 Nxf3+ 8. gxf3 a6 9. Nc3 Rg8 10. O-O-O d6 11. Rxd6 Qxd6 12. Ne4 Qg6 13. Bd4 Qh6+ 14. e3 Bd7 15. Bc4 Bc8 16. Bd5 Kd8 17. Be5 Ra7 18. Bd4 Ra8 19. Be5 Bf5 20. Bd4 Bxe4 21. Bxe4 Qe6 22. Bd5 Qxd5 23. e4 Qxd4 24. e5 Qxf2 25. e6 fxe6 26. f4 Qxf4+ 27. Kd1 Qe4 28. c4 Qxh1+ 29. Ke2 Qxh2+ 30. Ke3 Qxb2 31. Ke4 Qxa2 32. Ke5 Qe2+ 33. Kd4 Qa2 34. Ke4 Qxc4+ 35. Ke5 Qb3 36. Ke4 Qb6 37. Ke5 Qe3# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0016"]
+[White "MinimaxBot-D2"]
+[Black "CenterBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nc3 d5 2. Nf3 Be6 3. Ne5 Nf6 4. Rg1 Ne4 5. Nxe4 dxe4 6. Rh1 Nc6 7. Nxc6 Qd5 8. Nb4 O-O-O 9. Nxd5 Rxd5 10. Rb1 Rd4 11. Ra1 Rd5 12. d4 Rxd4 13. Qxd4 Bd5 14. Qxd5 e5 15. Qxf7 Bd6 16. Qxg7 Bc5 17. Qxh8+ Kd7 18. Qxh7+ Ke6 19. Qh6+ Kd5 20. Qd2+ Bd4 21. Qd1 Kd6 22. Bg5 Kd5 23. Be3 Kd6 24. Bxd4 exd4 25. Qxd4+ Ke6 26. Qxa7 Ke5 27. Qxb7 Kd4 28. Qxc7 Kd5 29. Qg3 Kd4 30. Qg5 Kc4 31. Qg6 Kd4 32. Rc1 Kd5 33. Qg7 Kd6 34. Rg1 Kd5 35. Qh8 Kc4 36. Qa8 Kd4 37. Rb1 Ke5 38. Qf8 Kd5 39. Kd2 Ke5 40. Rc1 Kd4 41. Qf7 Ke5 42. Qf8 Kd5 43. Qf6 Kc5 44. Re1 Kd5 45. Rh1 e3+ 46. Kxe3 Kc5 47. Qe7+ Kd5 48. Qf7+ Ke5 49. Qb3 Kd6 50. Rb1 Ke5 51. Rd1 Kf5 52. Qc4 Ke5 53. Qc7+ Ke6 54. Qc6+ Ke5 55. Rd5# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0017"]
+[White "CenterBot"]
+[Black "MinimaxBot-D3"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. Nf3 Nc6 2. Nc3 Nb4 3. Nd5 Nxd5 4. e4 Nb4 5. Bd3 Nf6 6. O-O Nxd3 7. cxd3 Ng4 8. e5 Rb8 9. Nd4 Nxe5 10. Nf5 Nxd3 11. Nd4 Rg8 12. f4 Ra8 13. Ne6 dxe6 14. f5 Qd4+ 15. Rf2 Qxf2+ 16. Kh1 Qd4 17. fxe6 Nf2+ 18. Kg1 Nxd1+ 19. Kf1 Qf2# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0018"]
+[White "MinimaxBot-D3"]
+[Black "CenterBot"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nc3 Nc6 2. Nd5 Ne5 3. Nh3 Nf6 4. Nxf6+ gxf6 5. Nf4 d5 6. d4 Be6 7. dxe5 fxe5 8. Nxe6 fxe6 9. Bg5 e4 10. Rc1 e5 11. Rg1 d4 12. Rb1 Qd5 13. Ra1 O-O-O 14. Qd2 Qc4 15. Bh4 Rd5 16. Kd1 Qc5 17. Qg5 Bg7 18. Qxg7 e3 19. Bxe7 e4 20. Qxh8+ Kd7 21. Qd8+ Ke6 22. Qg8+ Ke5 23. Qh8+ Kf4 24. Qf6+ Rf5 25. g3+ Kg4 26. h3+ Kh5 27. g4# 1-0
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0019"]
+[White "MinimaxBot-D2"]
+[Black "MinimaxBot-D3"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. Nc3 Nf6 2. Nf3 Ng4 3. Nd4 Na6 4. f3 Ne5 5. f4 Nc4 6. Nd5 Nc5 7. Kf2 Ne4+ 8. Kg1 e6 9. Nxc7+ Qxc7 10. d3 Qd6 11. dxe4 Be7 12. Qe1 Qxd4+ 13. e3 Nxe3 14. Bxe3 Qxe4 15. Rd1 Bb4 16. Qf2 O-O 17. Bc1 Be1 18. Qc5 Re8 19. Qb5 Bh4 20. Rd6 Qe1 21. Qc5 Qxc1 22. Qa3 Qxf4 23. Rd2 Qxd2 24. Qc5 d6 25. Qxa7 Rxa7 26. g3 Qd5 27. gxh4 Rxa2 28. Bg2 Ra1+ 29. Bf1 Qf3 30. c4 Qe2 31. h5 Rd1 32. h6 Ra1 33. b4 b6 34. b5 g5 35. h3 Bb7 36. Rh2 Rxf1# 0-1
+
+
+
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0020"]
+[White "MinimaxBot-D3"]
+[Black "MinimaxBot-D2"]
+[Result "1-0"]
+[Termination "CHECKMATE"]
+
+1. Nf3 Nf6 2. Ne5 Ne4 3. Na3 Na6 4. Nac4 Nac5 5. Ne3 Rg8 6. Nf5 Rh8 7. Nd4 Rg8 8. Nf5 Rh8 9. Rb1 Rb8 10. Ra1 Ra8 11. Nd4 Rb8 12. b4 Na4 13. d3 Nd6 14. Bg5 Nc3 15. Qd2 Nd5 16. Rg1 Rg8 17. Rd1 Rh8 18. Rh1 Rg8 19. Rb1 Rh8 20. Bh4 Ra8 21. Rb2 Rg8 22. Kd1 Rb8 23. Rg1 Ra8 24. Kc1 Rh8 25. Qg5 Rb8 26. Qg4 Rg8 27. Qf3 Nc3 28. Kd2 Nxa2 29. Rxa2 Rh8 30. Qd5 Ne4+ 31. dxe4 e6 32. Bxd8 exd5 33. Bxc7 Bxb4+ 34. c3 Bxc3+ 35. Kxc3 Ra8 36. exd5 Rf8 37. Kc2 Rg8 38. Kd1 Rf8 39. Kc2 Rg8 40. Kd3 Kf8 41. Kc3 Ke7 42. Bb6 Kf8 43. Bxa7 Ke7 44. Bc5+ Kd8 45. Rxa8 Rh8 46. Nxf7+ Ke8 47. Nxh8 Kd8 48. Nf7+ Ke8 49. Ne5 Kd8 50. Bd6 h6 51. Kb2 h5 52. Rb8 h4 53. h3 b6 54. Nb5 g6 55. Nc7 g5 56. g4 hxg3 57. fxg3 g4 58. Kc2 b5 59. Ra8 b4 60. Nf7# 1-0
+
+
+

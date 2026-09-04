@@ -1,0 +1,63 @@
+# Chess Arena Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+tournament:
+  # Tournament format: "round_robin" or "single_elimination"
+  format: "round_robin"
+
+  # Number of games each pair plays (round robin).
+  # In round robin each pair always plays an EVEN number of games so that
+  # colors alternate fairly.  If you set an odd number here the runner will
+  # round up to the next even number.
+  games_per_pair: 2
+
+match:
+  # Maximum seconds an agent has to return a move.
+  move_time_limit: 5.0
+
+  # Maximum total moves in a game before it is declared a draw.
+  max_moves: 500
+
+  # Whether to print the ASCII board to stdout after every move.
+  display_board: false
+
+output:
+  # Directory where PGN files and results are stored.
+  games_dir: "games"
+
+  # Directory for tournament result summaries.
+  results_dir: "results"
+
+agents:
+  # List of agents to load.  Each entry needs:
+  #   module : dotted Python import path
+  #   class  : class name inside that module
+  #   name   : display name for leaderboard / PGN headers
+  #   config : arbitrary dict forwarded to the agent constructor
+
+  - module: "chess_arena.agents.random_agent"
+    class: "RandomAgent"
+    name: "RandomBot"
+    config: {}
+
+  - module: "chess_arena.agents.greedy_agent"
+    class: "GreedyAgent"
+    name: "GreedyBot"
+    config: {}
+
+  - module: "chess_arena.agents.center_control_agent"
+    class: "CenterControlAgent"
+    name: "CenterBot"
+    config: {}
+
+  - module: "chess_arena.agents.minimax_agent"
+    class: "MinimaxAgent"
+    name: "MinimaxBot-D2"
+    config:
+      depth: 2
+
+  - module: "chess_arena.agents.minimax_agent"
+    class: "MinimaxAgent"
+    name: "MinimaxBot-D3"
+    config:
+      depth: 3

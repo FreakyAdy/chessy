@@ -1,0 +1,11 @@
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0005"]
+[White "RandomBot"]
+[Black "MinimaxBot-D2"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. a3 Nf6 2. e4 Nxe4 3. f3 Nc5 4. Qe2 Nc6 5. Qd3 Nxd3+ 6. Kd1 Nxc1 7. Nh3 Nb3 8. c3 Nxa1 9. f4 Nb3 10. Kc2 Nc5 11. Ng5 f6 12. b4 fxg5 13. Rg1 Ne4 14. d3 Nd6 15. Kd1 gxf4 16. g4 fxg3 17. b5 Nxb5 18. Rg2 gxh2 19. Rg5 h1=Q 20. Rf5 Nxc3+ 21. Nxc3 Nd4 22. Na4 Nxf5 23. Nb2 Qxf1+ 24. Kd2 Qg2+ 25. Ke1 Qxb2 26. Kd1 Qxa3 27. Kc2 Nd4+ 28. Kb1 Qxd3+ 29. Ka1 Qa6+ 30. Kb1 Qf1+ 31. Kb2 Qf6 32. Ka3 Qe5 33. Ka4 Qe6 34. Ka5 Rg8 35. Ka4 Qc4+ 36. Ka5 Nb3# 0-1
+

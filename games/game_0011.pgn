@@ -1,0 +1,11 @@
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0011"]
+[White "GreedyBot"]
+[Black "MinimaxBot-D2"]
+[Result "0-1"]
+[Termination "CHECKMATE"]
+
+1. f3 Nf6 2. b3 Nc6 3. e4 Nd4 4. Be2 Nxe2 5. Kxe2 Rg8 6. Ba3 Rh8 7. Bxe7 Qxe7 8. Nh3 Nd5 9. Qc1 Kd8 10. Kf1 Nf6 11. Ke1 Nd5 12. Qa3 Qxa3 13. Nxa3 Bxa3 14. exd5 Re8+ 15. Kd1 Bb4 16. Nf4 Ba5 17. Ne2 Re5 18. Nf4 Rf5 19. d4 Rxf4 20. Rc1 Rxd4+ 21. Ke2 Rxd5 22. g4 Rd6 23. Rb1 Bb6 24. Rhf1 Rh6 25. Rfc1 Rxh2+ 26. Kd1 Bc5 27. Rb2 Bf8 28. a4 Rh1+ 29. Kd2 Rh2+ 30. Kc3 Re2 31. Ra1 Re8 32. b4 Re6 33. Kd4 Rf6 34. a5 Rxf3 35. a6 Rf4+ 36. Kd3 Rf3+ 37. Kd4 Rf4+ 38. Kc3 Rf3+ 39. Kc4 Rf4+ 40. Kb3 Rxb4+ 41. Ka3 Rxg4+ 42. Kb3 Rg3+ 43. Ka4 bxa6 44. Ka5 Rc3 45. Rg1 Ra3# 0-1
+

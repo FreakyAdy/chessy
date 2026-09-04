@@ -1,0 +1,11 @@
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0001"]
+[White "RandomBot"]
+[Black "GreedyBot"]
+[Result "1/2-1/2"]
+[Termination "STALEMATE"]
+
+1. d3 c5 2. Nf3 f5 3. Nd4 cxd4 4. Nd2 g5 5. e3 dxe3 6. f4 exd2+ 7. Kf2 dxc1=Q 8. Qg4 fxg4 9. b3 Qxa1 10. Rg1 Qxf1+ 11. Kg3 Qxg1 12. Kxg4 gxf4 13. Kf3 Qxg2+ 14. Kxg2 Qc7 15. c3 Qxc3 16. a3 Qxb3 17. Kh3 Qxa3 18. Kg4 Qxd3 19. h3 Qxh3+ 20. Kg5 Qh1 21. Kxf4 Qf1+ 22. Kg4 Qh1 23. Kg5 Qd1 24. Kf4 Qd3 25. Ke5 d6+ 26. Kf4 Bh3 27. Kg5 Bg2 28. Kg4 Bf1 29. Kh5 e5 30. Kg5 Qd2+ 31. Kf5 Nf6 32. Kxf6 Bg2 33. Kf5 Ke7 34. Kg4 Bh3+ 35. Kf3 Qd1+ 36. Ke3 a6 37. Kf2 Qh1 38. Kg3 Qa1 39. Kf3 Bc8 40. Ke3 Qa2 41. Kf3 b6 42. Ke3 Qb3+ 43. Ke4 Qe3+ 44. Kd5 Qc5+ 45. Ke4 Qc6+ 46. Kd3 d5 47. Ke2 Qc7 48. Kd1 Qd6 49. Kc1 Ke8 50. Kd1 Bh6 51. Kc2 Qd8 52. Kc3 Rg8 53. Kd3 Rg1 54. Kc3 Nd7 55. Kb4 Bc1 56. Ka4 Rh1 57. Kb4 a5+ 58. Ka4 b5+ 59. Kb3 Nc5+ 60. Kc3 Ra7 61. Kc2 Rd7 62. Kc3 Rh6 63. Kc2 Kf8 64. Kxc1 Re6 65. Kc2 Qb6 66. Kb2 Rde7 67. Kc2 a4 68. Kb2 Na6 69. Kb1 Qg1+ 70. Ka2 Nb8 71. Kb2 Rd7 72. Ka2 Qa1+ 73. Kxa1 Nc6 74. Kb2 Ke7 75. Ka2 Ra7 76. Ka3 Bd7 77. Kb2 Bc8 78. Kc1 Kf7 79. Kd2 Nd8 80. Kc1 Rc7+ 81. Kd1 b4 82. Kd2 Kg6 83. Ke3 Kh5 84. Kf2 Rd6 85. Kg2 Nb7 86. Kg3 d4 87. Kg2 Rc4 88. Kg3 Rg6+ 89. Kf3 Rc3+ 90. Kf2 Be6 91. Ke2 Nd6 92. Ke1 Rc7 93. Kd1 b3 94. Ke2 Bg4+ 95. Ke1 Kh6 96. Kf1 Rc2 97. Ke1 Rc8 98. Kd2 Nb7 99. Ke1 Rg5 100. Kf2 Rd8 101. Kg1 e4 102. Kf2 Bf5 103. Ke2 Rd5 104. Kf2 Rg4 105. Ke1 b2 106. Ke2 Rg1 107. Kf2 b1=Q 108. Ke2 Ra5 109. Kd2 Rg4 110. Ke2 Kg5 111. Kd2 Qa2+ 112. Ke1 Rb5 113. Kf1 Qf7 114. Kf2 Qc7 115. Kf1 Bc8 116. Kf2 Qd7 117. Ke2 a3 118. Ke1 Nd8 119. Kd2 Kf4 120. Ke2 Qf7 121. Kf2 Rb8 122. Kf1 Rg1+ 123. Kf2 Rg4 124. Ke2 Qc4+ 125. Kd1 Kf5 126. Kd2 Qc7 127. Ke1 Ba6 128. Kd2 Qd6 129. Kc2 Rg1 130. Kd2 Qd7 131. Kc2 Rg7 132. Kd2 Qe6 133. Ke1 Qa2 134. Kd1 Qg2 135. Kc1 Ra7 136. Kd1 h5 137. Ke1 Rb4 138. Kd1 Qh1+ 139. Kd2 Qh2+ 140. Kc1 Qh4 141. Kc2 Bd3+ 142. Kc1 Rba4 143. Kd1 R7a6 144. Kd2 Nb7 145. Kc1 Rh6 146. Kd1 Bc2+ 147. Kd2 Nd6 148. Kc1 Ra6 149. Kd2 Nc4+ 150. Kxc2 Kf4 151. Kb1 Qe1+ 152. Ka2 Qc3 153. Kb1 Qc2+ 154. Ka1 Qc3+ 155. Kb1 Rh8 156. Ka2 Rd8 157. Kb1 Nb2 158. Ka2 h4 159. Ka1 Qe1+ 160. Ka2 Qf2 161. Kb1 Rc6 162. Ka1 a2 163. Kxa2 Rc3 164. Kb1 Qd2 165. Ka1 Nc4 166. Kb1 Qc1+ 167. Ka2 Rf3 1/2-1/2
+

@@ -1,0 +1,11 @@
+[Event "Chess Arena"]
+[Site "Local"]
+[Date "2026-09-04"]
+[Round "game_0009"]
+[White "GreedyBot"]
+[Black "CenterBot"]
+[Result "1/2-1/2"]
+[Termination "DRAW (insufficient material)"]
+
+1. f4 Nc6 2. Nh3 e5 3. fxe5 Bd6 4. exd6 Ne5 5. dxc7 d5 6. cxd8=Q+ Kxd8 7. a4 Be6 8. b3 d4 9. g3 Nf6 10. c4 Nd5 11. cxd5 Bxd5 12. Ba3 Bxh1 13. Qc1 Bd5 14. g4 Be4 15. Kd1 Bd5 16. Qc8+ Rxc8 17. Ng5 Be4 18. Nxe4 Rc4 19. bxc4 Nxc4 20. Bf8 Ne5 21. Bxg7 d3 22. Bxh8 Nc4 23. exd3 Ne5 24. Bxe5 f5 25. gxf5 Ke7 26. Ng5 a5 27. Nxh7 Kf7 28. Bb2 Ke7 29. Kc1 Kd6 30. h4 Kd5 31. Bh8 Kc5 32. Nf6 Kd4 33. Ra3 Ke5 34. Ng4+ Kd5 35. Bf6 Kc5 36. Bc3 Kd5 37. Bxa5 Kd4 38. Bh3 Kd5 39. Rb3 Kd4 40. Rxb7 Kd5 41. Nh2 Ke5 42. Kb2 Kd4 43. f6 Ke5 44. Na3 Kd4 45. Kb1 Kxd3 46. Bc7 Kd4 47. Be6 Ke4 48. Rb8 Kd4 49. Ba2 Ke4 50. Rb4+ Kf5 51. Nc2 Kxf6 52. Rb3 Ke6 53. Rh3+ Kf5 54. Na1 Ke4 55. Bc4 Kd4 56. Rg3 Kxc4 57. Rg8 Kd5 58. Rg5+ Kd4 59. h5 Ke4 60. h6 Kd4 61. Rf5 Ke4 62. Rg5 Kd4 63. Rb5 Ke4 64. Bd6 Kd4 65. Kb2 Ke4 66. Ka2 Kd4 67. Rc5 Ke4 68. Rb5 Kd4 69. Rc5 Ke4 70. Rc3 Kd4 71. Rd3+ Kxd3 72. Nf3 Ke4 73. Be5 Kd5 74. Nh4 Kxe5 75. h7 Kd4 76. h8=B+ Ke4 77. Nf5 Kxf5 78. a5 Ke4 79. Bd4 Kxd4 80. Kb2 Ke4 81. Ka2 Ke5 82. Kb1 Kd5 83. d4 Kxd4 84. Kc2 Ke5 85. Nb3 Ke4 86. Nd4 Kxd4 87. Kb1 Kd5 88. Ka1 Ke5 89. Ka2 Kd5 90. Kb1 Kd4 91. Kc2 Ke4 92. Kd1 Kd4 93. Kd2 Ke5 94. Kc1 Kd4 95. Kb1 Ke5 96. Kb2 Ke4 97. Kc3 Kd5 98. Kb2 Ke5 99. Ka3 Kd4 100. Ka2 Ke4 101. a6 Kd4 102. a7 Kd5 103. Kb3 Ke5 104. a8=N 1/2-1/2
+

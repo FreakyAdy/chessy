@@ -1,0 +1,14 @@
+Chess Arena — Final Standings
+============================================================
+
+Format: round_robin
+Total games: 20
+
+#    Agent                        Pts    W    D    L   GP
+------------------------------------------------------------
+1    MinimaxBot-D3                8.0    8    0    0    8
+2    MinimaxBot-D2                6.0    6    0    2    8
+3    CenterBot                    2.5    1    3    4    8
+4    GreedyBot                    2.0    0    4    4    8
+5    RandomBot                    1.5    0    3    5    8
+
