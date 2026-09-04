@@ -2,60 +2,59 @@
 
 ## Summary of Changes
 
-### 1. Model Eligibility & Compliance Auditor Engine
-To allow users to upload or point to any friend's model and audit whether it conforms to rules, generates strictly legal moves, stays within time limits, and is eligible for tournament entry:
-- **`chess_arena/arena/validator.py`**:
-  - Implemented `ModelAuditor` and `AuditReport`.
-  - Dynamically imports models from raw file paths (e.g. `uploaded_agents/friend_bot.py`), module specifiers (`module:Class`), or module paths.
-  - Tests models against **16 canonical FIDE benchmark positions** (startpos, check evasion, en passant, kingside/queenside castling, castling through check rejection, pawn promotion, absolute pins, double check, discovered check, knight forks, back-rank mate, stalemate avoidance, insufficient material draws, endgame pawn race, and underpromotion).
-  - Benchmarks move decision latency (average, 95th percentile, peak decision time).
-  - Verifies IPC subprocess execution via `AgentProcess` to ensure models do not freeze the main tournament loop.
-  - Generates rich, stylized audit reports with qualification verdicts (`ELIGIBLE` vs `DISQUALIFIED`), deficiency breakdowns, and ready-to-use `config.yaml` snippets.
-- **Subprocess Worker Dynamic File Support (`chess_arena/arena/adapter.py`)**:
-  - Enhanced `_agent_worker` to import `.py` files directly from disk via `importlib.util.spec_from_file_location` without requiring package installation.
-- **Standalone Auditor CLI (`verify_agent.py`)**:
-  - Direct file argument support: `python verify_agent.py uploaded_agents/my_bot.py`
-  - Interactive mode: running `python verify_agent.py` automatically scans `uploaded_agents/` and prompts the user to select an agent.
-- **Main CLI Integration (`main.py`)**:
-  - Added `--verify-agent [PATH]` / `-v [PATH]` flag to `main.py`.
-- **Starter Template for Community & Friends (`uploaded_agents/template_agent.py`)**:
-  - Clean starter agent with capture scoring and center-control heuristics, ready for customization.
+### 1. Web UI Matching the TrueColor SVG Aesthetic
+Built a comprehensive browser-based Web UI application that faithfully mirrors the layout, warm wooden board palette, high-contrast piece tiles, and telemetry cards of [`docs/live_board_demo.svg`](file:///c:/Work/Projects/chessy/docs/live_board_demo.svg):
+- **FastAPI & WebSocket Backend (`chess_arena/web/app.py`, `chess_arena/web/tournament_bridge.py`)**:
+  - Asynchronous tournament bridge broadcasting millisecond-accurate move events, live decision clocks, FEN snapshots, referee rules validation, and standings updates.
+  - REST endpoints for bot listing (`GET /api/bots`), multi-file upload (`POST /api/upload`), qualification audit (`POST /api/audit`), tournament control (`POST /api/tournament/start`, `pause`, `resume`, `speed`, `stop`), and PGN download (`GET /api/pgn/{match_id}`).
+- **Interactive Frontend (`chess_arena/web/static/`)**:
+  - macOS dark window chrome with window controls (`#ff5f56`, `#ffbd2e`, `#27c93f`), match header banner with player badges and pulsing green `● LIVE` status indicator.
+  - 8x8 Wooden Chessboard with golden oak (`#b5936e`) and dark walnut (`#80522c`) squares, move origin/destination highlights, and solid high-contrast piece tiles (`#1c1917 on #f5f5f4` for White, `#f5f5f4 on #1c1917` for Black).
+  - Telemetry cards: Active Turn, Last Move badge (e.g. `2. ... e7-e5`), decision timer bar, copyable FEN string, live referee status (`✓ Legality Verified`), and scrollable match move stream.
+  - Dynamic tournament leaderboard updating live after every completed match.
+- **5-Bot Uploader & Instant Qualification Gate**:
+  - Drag-and-drop modal supporting up to 5 custom Python bot files (`.py`).
+  - Automatically triggers the 16-FEN `ModelAuditor` in the background on upload.
+  - Displays instant qualification cards with score (`95/100`), checks passed (`20/20`), latency benchmarks, and specific deficiency breakdowns if disqualified.
+  - Roster selector allowing users to choose 2 to 5 bots for the upcoming tournament.
+- **Single-Command Launch**:
+  - `python main.py --web` or `python web_server.py --port 8000`.
 
 ---
 
-### 2. Comprehensive Test Suite Expansion
-- **`chess_arena/tests/test_validator.py`**:
-  - `test_audit_valid_greedy_agent`: Verifies built-in agents pass all checks and receive `ELIGIBLE`.
-  - `test_audit_template_agent_file`: Verifies `uploaded_agents/template_agent.py` passes all checks and receives `ELIGIBLE`.
-  - `test_audit_illegal_move_agent`: Verifies that an agent generating an illegal move is immediately flagged `DISQUALIFIED` with critical legality findings.
-  - `test_audit_crashing_agent`: Verifies that an agent raising uncaught exceptions is marked `DISQUALIFIED`.
-- **Test Suite Results**:
-  All **41 unit tests** pass with 100% success rate:
+## Visual Verification & Screenshots
+
+### 1. Live Match in Progress
+The chessboard updates in-place over WebSockets with live move highlights, decision clock, and telemetry cards:
+
+![Live Match in Progress](C:/Users/FreakyAdy/.gemini/antigravity-ide/brain/70d5b7dd-b062-4764-b939-db5634623f9c/live_match_in_progress_1788507781257.png)
+
+### 2. Candidate Bot Manager & 5-Bot Uploader Modal
+Drag-and-drop custom `.py` models with instant rule qualification scoring and roster selection:
+
+![Bot Manager Modal](C:/Users/FreakyAdy/.gemini/antigravity-ide/brain/70d5b7dd-b062-4764-b939-db5634623f9c/manage_bots_modal_1788507736555.png)
+
+### 3. Tournament Leaderboard & Standings
+Dynamic standings table updating in real time with points, wins, draws, losses, and win rate:
+
+![Tournament Leaderboard](C:/Users/FreakyAdy/.gemini/antigravity-ide/brain/70d5b7dd-b062-4764-b939-db5634623f9c/leaderboard_view_1788507828320.png)
+
+---
+
+## Automated Test Suite
+
+All **49 automated tests** pass with 100% success rate:
+- **`chess_arena/tests/test_web.py`**:
+  - `test_root_serves_html`: 200 OK index.html serving.
+  - `test_list_bots`: Enumeration of built-in and community agents.
+  - `test_audit_endpoint`: `ModelAuditor` integration via REST.
+  - `test_upload_invalid_file_extension`: Rejects non-`.py` files with 400 Bad Request.
+  - `test_upload_valid_bot`: Audits and admits valid custom Python bots into `uploaded_agents/`.
+  - `test_tournament_validation_min_bots`: Validates minimum 2 bots required.
+  - `test_tournament_validation_max_bots`: Validates maximum 5 bots allowed.
+  - `test_websocket_live_connection`: Validates live WebSocket connection and state snapshots.
+- **Full Test Run**:
   ```powershell
   python -m unittest discover -s chess_arena/tests
-  # Ran 41 tests in 1.827s - OK
+  # Ran 49 tests in 3.708s - OK
   ```
-
----
-
-### 3. README.md Revamp (Structured After Reference Repo)
-Redesigned `README.md` following the exact visual hierarchy, badges, navigation links, and layout of `https://github.com/FreakyAdy/Reward-Hackability-Auditor--CLI---Claude-Skill-`:
-1. **Centered Header & Badges**:
-   - `♔ Chess Arena` title, subtitle, and punchy tagline.
-   - Centered Shields.io badges: CI / Quality Gate, Tests Passing (41/41, 100%), Referee Engine (FIDE-compliant), Model Auditor Gate, Sandbox Isolation, Python 3.10+, Live TUI Board, License MIT.
-   - Quick navigation links (`Quick Demo`, `Why Chess Arena`, `Model Eligibility Gate`, `Benchmark Suite`, `Architecture`, `Agent Roster`, `Quick Start`).
-2. **Quick Demo**:
-   - Terminal demonstration of `python verify_agent.py uploaded_agents/template_agent.py` with the full audit report.
-   - Terminal demonstration of live in-place board rendering (`python main.py --display --delay 0.1`).
-3. **Why Chess Arena?**:
-   - Comparison matrix contrasting naive scripts against `Chess Arena` across 6 key dimensions.
-4. **Model Eligibility & Qualification Gate**:
-   - Detailed step-by-step instructions for uploading a friend's model, running the audit, understanding the 5 qualification criteria, and admitting the model to `config.yaml`.
-5. **16-FEN Benchmark Suite & Compliance Matrix**:
-   - Full tabular breakdown of all 16 test vector FENs and the specific rules tested.
-6. **System Architecture**:
-   - Mermaid diagram illustrating Ingestion & Qualification -> Subprocess Sandbox -> Match Engine & Referee -> Presentation & Standings.
-7. **Agent Roster & Baselines**:
-   - Breakdown of all available agents.
-8. **Quick Start & Configuration Guide**:
-   - Clear setup commands and annotated `config.yaml`.

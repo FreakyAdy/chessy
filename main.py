@@ -142,7 +142,34 @@ def main() -> None:
         metavar="PATH",
         help="Audit a friend's model for rule compliance, move legality, and tournament eligibility.",
     )
+    parser.add_argument(
+        "--web", "-w",
+        action="store_true",
+        help="Launch the live Web UI & tournament streaming server.",
+    )
+    parser.add_argument(
+        "--port", "-p",
+        type=int,
+        default=8000,
+        help="Port for the Web UI server (default: 8000).",
+    )
     args = parser.parse_args()
+
+    # ── Web UI Server ────────────────────────────────────────────────────
+    if args.web:
+        import uvicorn
+        console.print(
+            Panel(
+                f"[bold white]♔  CHESS ARENA — LIVE WEB UI[/]\n"
+                f"[dim]Running at http://127.0.0.1:{args.port}[/]\n"
+                f"[cyan]WebSocket streaming & 5-bot uploader active[/]",
+                box=box.DOUBLE_EDGE,
+                style="bold cyan",
+                expand=False,
+            )
+        )
+        uvicorn.run("chess_arena.web.app:app", host="127.0.0.1", port=args.port, log_level="info")
+        sys.exit(0)
 
     # ── Model Audit Gate ─────────────────────────────────────────────────
     if args.verify_agent is not None:

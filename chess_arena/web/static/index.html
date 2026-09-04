@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>♔ Chess Arena — Live Tournament Web UI</title>
+  <meta name="description" content="Multi-Agent AI Chess Competition Framework with Live SVG-style Web UI, Real-Time Subprocess Matches, and 5-Bot Uploader Gate.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!-- Ambient Background Glows -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Main Application Container -->
+  <div class="app-window">
+    <!-- macOS Style Terminal Window Bar -->
+    <header class="window-header">
+      <div class="window-controls">
+        <span class="control-dot dot-close" title="Close"></span>
+        <span class="control-dot dot-minimize" title="Minimize"></span>
+        <span class="control-dot dot-maximize" title="Maximize"></span>
+      </div>
+      <div class="window-title">
+        <span class="crown-icon">♔</span>
+        <span>Chess Arena — Live Tournament Web UI</span>
+        <span class="version-tag">v2.0 Subprocess Sandbox</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-open-bot-modal" class="btn btn-secondary btn-sm">
+          <span class="btn-icon">🤖</span>
+          <span>Manage Bots</span>
+          <span id="bot-count-badge" class="badge">4</span>
+        </button>
+        <button id="btn-sound-toggle" class="btn btn-icon-only btn-sm" title="Toggle Move Sounds">
+          <span id="sound-icon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Match Header Banner -->
+    <section class="match-banner">
+      <div class="match-meta">
+        <span id="match-number-badge" class="match-tag">Match 1/20</span>
+        <span id="tournament-format-badge" class="meta-label">• Round-Robin Tournament</span>
+      </div>
+
+      <div class="versus-container">
+        <!-- White Player Badge -->
+        <div class="player-badge player-white">
+          <div class="player-tile-icon white-icon">♔</div>
+          <div class="player-info">
+            <span class="player-label">WHITE</span>
+            <span id="player-white-name" class="player-name">GreedyBot</span>
+          </div>
+          <div id="white-captured-box" class="captured-pieces" title="Captured Black pieces"></div>
+        </div>
+
+        <div class="versus-divider">
+          <span class="vs-text">VS</span>
+        </div>
+
+        <!-- Black Player Badge -->
+        <div class="player-badge player-black">
+          <div class="player-tile-icon black-icon">♚</div>
+          <div class="player-info">
+            <span class="player-label">BLACK</span>
+            <span id="player-black-name" class="player-name">Minimax-d2</span>
+          </div>
+          <div id="black-captured-box" class="captured-pieces" title="Captured White pieces"></div>
+        </div>
+      </div>
+
+      <!-- Live Pulsing Status Pill -->
+      <div class="live-pill-wrapper">
+        <div id="status-pill" class="status-pill status-live">
+          <span class="pulse-indicator"></span>
+          <span id="status-pill-text">LIVE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tournament Control Toolbar -->
+    <div class="control-toolbar">
+      <div class="toolbar-left">
+        <button id="btn-start-tourney" class="btn btn-primary">
+          <span class="btn-icon">▶</span>
+          <span id="btn-start-text">Start Tournament</span>
+        </button>
+        <button id="btn-pause-tourney" class="btn btn-warning" disabled>
+          <span id="pause-icon">⏸</span>
+          <span id="btn-pause-text">Pause</span>
+        </button>
+        <button id="btn-stop-tourney" class="btn btn-danger" disabled>
+          <span>⏹</span>
+          <span>Stop</span>
+        </button>
+      </div>
+
+      <div class="toolbar-center speed-control">
+        <label for="speed-slider" class="speed-label">
+          <span>Animation Delay:</span>
+          <span id="speed-value" class="speed-display">0.25s</span>
+        </label>
+        <input type="range" id="speed-slider" min="0.05" max="1.5" step="0.05" value="0.25">
+      </div>
+
+      <div class="toolbar-right">
+        <div class="dropdown-wrapper">
+          <select id="select-format" class="select-dropdown">
+            <option value="round_robin">Round-Robin (2 Games / Pair)</option>
+            <option value="single_elimination">Single Elimination Bracket</option>
+          </select>
+        </div>
+        <button id="btn-download-pgn" class="btn btn-secondary btn-sm" disabled title="Download PGN of Current Match">
+          <span>⬇</span> PGN
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content Arena -->
+    <main class="arena-layout">
+      <!-- Left Column: 8x8 Chessboard -->
+      <section class="board-column">
+        <div class="chessboard-wrapper">
+          <!-- Top File Labels (a-h) -->
+          <div class="coord-row file-coords-top">
+            <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span>
+          </div>
+
+          <div class="board-middle-row">
+            <!-- Left Rank Labels (8-1) -->
+            <div class="coord-col rank-coords-left">
+              <span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+            </div>
+
+            <!-- Authentic 8x8 Wooden Chessboard Grid -->
+            <div id="chessboard" class="chessboard-grid">
+              <!-- 64 Squares dynamically generated with high-contrast piece tiles -->
+            </div>
+
+            <!-- Right Rank Labels (8-1) -->
+            <div class="coord-col rank-coords-right">
+              <span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+            </div>
+          </div>
+
+          <!-- Bottom File Labels (a-h) -->
+          <div class="coord-row file-coords-bottom">
+            <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Telemetry & Control Center -->
+      <aside class="telemetry-column">
+        <!-- Telemetry Card -->
+        <div class="card telemetry-card">
+          <div class="card-header">
+            <span class="card-title">Live Game Telemetry</span>
+            <span id="connection-status" class="connection-badge connected">● Connected</span>
+          </div>
+
+          <!-- Metric 1: Active Turn -->
+          <div class="telemetry-item">
+            <span class="item-label">ACTIVE TURN</span>
+            <div class="turn-display-box">
+              <span id="turn-dot" class="turn-dot white-turn"></span>
+              <span id="turn-text" class="turn-text">White to move (GreedyBot)</span>
+            </div>
+          </div>
+
+          <!-- Metric 2 & 3: Last Move & Decision Clock -->
+          <div class="telemetry-row">
+            <div class="telemetry-item half">
+              <span class="item-label">LAST MOVE PLAYED</span>
+              <div class="metric-box green-highlight">
+                <span id="last-move-text" class="metric-value font-mono">1. e4</span>
+              </div>
+            </div>
+
+            <div class="telemetry-item half">
+              <span class="item-label">DECISION TIME</span>
+              <div class="metric-box blue-highlight">
+                <span id="clock-text" class="metric-value font-mono">0.12s</span>
+                <span class="metric-sub font-mono">/ 5.00s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Move Progress Bar -->
+          <div class="timer-bar-container">
+            <div id="timer-bar" class="timer-bar" style="width: 2%;"></div>
+          </div>
+
+          <!-- Metric 4: FEN Snapshot -->
+          <div class="telemetry-item">
+            <div class="item-label-row">
+              <span class="item-label">CURRENT FEN (STATE FORMAT)</span>
+              <button id="btn-copy-fen" class="btn-text-link" title="Copy FEN to clipboard">Copy</button>
+            </div>
+            <div class="fen-box">
+              <code id="fen-text" class="font-mono">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1</code>
+            </div>
+          </div>
+
+          <!-- Metric 5: Referee Status & Rules -->
+          <div class="telemetry-item">
+            <span class="item-label">REFEREE STATUS & FIDE RULES</span>
+            <div class="referee-box">
+              <div class="referee-line">
+                <span class="referee-check">✓</span>
+                <span class="referee-status-text">Legality Verified (python-chess Core)</span>
+              </div>
+              <div class="referee-grid">
+                <div>• Legal Moves: <strong id="referee-legal-count" class="text-white">20</strong></div>
+                <div>• Halfmove Clock: <strong id="referee-halfmove-count" class="text-white">0</strong></div>
+                <div>• Check: <strong id="referee-check-status" class="text-white">False</strong></div>
+                <div>• Draw Rules: <strong id="referee-draw-status" class="text-white">Compliant</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric 6: Move Stream Log -->
+          <div class="telemetry-item flex-grow">
+            <span class="item-label">MATCH MOVE LOG</span>
+            <div id="move-history-list" class="move-history-scroll font-mono">
+              <div class="history-empty">Game in progress... moves will stream live here.</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Bottom Dock: Tournament Leaderboard & Standings -->
+    <section class="bottom-dock">
+      <div class="dock-header">
+        <div class="dock-title">
+          <span>🏆 Tournament Leaderboard</span>
+          <span class="dock-subtitle">Rankings dynamically update after each match</span>
+        </div>
+        <div id="match-outcome-banner" class="match-outcome-banner hidden">
+          <!-- Dynamic Winner Announcement -->
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th class="col-bot">Bot Candidate</th>
+              <th class="col-pts">Pts</th>
+              <th class="col-stat">Wins</th>
+              <th class="col-stat">Draws</th>
+              <th class="col-stat">Losses</th>
+              <th class="col-stat">Played</th>
+              <th class="col-rate">Win Rate</th>
+            </tr>
+          </thead>
+          <tbody id="standings-tbody">
+            <!-- Populated dynamically -->
+            <tr>
+              <td class="col-rank font-mono">1</td>
+              <td class="col-bot"><strong>GreedyBot</strong> <span class="badge badge-heuristic">Heuristic</span></td>
+              <td class="col-pts font-mono font-bold">0.0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-rate font-mono">0.0%</td>
+            </tr>
+            <tr>
+              <td class="col-rank font-mono">2</td>
+              <td class="col-bot"><strong>Minimax-d2</strong> <span class="badge badge-search">Search</span></td>
+              <td class="col-pts font-mono font-bold">0.0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-stat font-mono">0</td>
+              <td class="col-rate font-mono">0.0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Window Status Footer -->
+    <footer class="window-footer">
+      <div class="footer-left">
+        <span class="footer-indicator">●</span>
+        <span>TrueColor Live TUI</span>
+        <span class="divider">|</span>
+        <span>Subprocess Sandboxed</span>
+        <span class="divider">|</span>
+        <span>FIDE Strict Referee</span>
+      </div>
+      <div class="footer-right">
+        <span id="footer-pgn-path">pgn: games/game_0001.pgn</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Bot Manager & Uploader Modal (Up to 5 Bots) -->
+  <div id="bot-modal" class="modal-backdrop hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">🤖</span>
+          <div>
+            <h3>Candidate Bot Manager & Eligibility Gate</h3>
+            <p class="modal-subtitle">Upload up to 5 custom Python bots. Each bot is rigorously audited against 16 FIDE benchmark positions.</p>
+          </div>
+        </div>
+        <button id="btn-close-modal" class="btn-close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Drag & Drop Upload Zone -->
+        <div id="drop-zone" class="drop-zone">
+          <input type="file" id="bot-file-input" accept=".py" style="display: none;">
+          <div class="drop-zone-content">
+            <span class="upload-icon">📤</span>
+            <div class="drop-text-main">Drag &amp; drop friend's <code>.py</code> agent here, or <span class="browse-link">browse files</span></div>
+            <div class="drop-text-sub">Must inherit from <code>ChessAgent</code> and implement <code>get_move(fen, legal_moves)</code>. Max 5 custom bots.</div>
+          </div>
+        </div>
+
+        <!-- Live Audit Report Container (Appears after upload) -->
+        <div id="audit-result-card" class="audit-card hidden">
+          <div class="audit-card-header">
+            <div>
+              <span id="audit-bot-name" class="audit-bot-title">FriendBot.py</span>
+              <span id="audit-qualification-badge" class="badge badge-eligible">ELIGIBLE FOR TOURNAMENT</span>
+            </div>
+            <div class="audit-score-pill">
+              <span class="score-label">Score</span>
+              <span id="audit-score-num" class="score-value">95/100</span>
+            </div>
+          </div>
+
+          <div class="audit-metrics-row">
+            <div class="audit-metric">
+              <span>Avg Latency:</span>
+              <strong id="audit-latency-avg">0.1 ms</strong>
+            </div>
+            <div class="audit-metric">
+              <span>Peak Time:</span>
+              <strong id="audit-latency-peak">0.2 ms</strong>
+            </div>
+            <div class="audit-metric">
+              <span>Checks Passed:</span>
+              <strong id="audit-checks-passed">20 / 20</strong>
+            </div>
+          </div>
+
+          <div id="audit-findings-list" class="audit-findings">
+            <!-- Findings or Success message -->
+          </div>
+        </div>
+
+        <!-- Available Bots Pool -->
+        <div class="bot-pool-section">
+          <div class="pool-header">
+            <h4>Select 2 to 5 Bots for Tournament Roster:</h4>
+            <span id="selected-count-pill" class="pill-counter">2 / 5 Selected</span>
+          </div>
+
+          <div id="bot-list-container" class="bot-cards-grid">
+            <!-- Populated dynamically with checkboxes -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btn-cancel-modal" class="btn btn-secondary">Cancel</button>
+        <button id="btn-apply-roster" class="btn btn-primary">Save Roster &amp; Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio elements for subtle move clicks (Web Audio API fallback in app.js) -->
+  <script src="/static/app.js"></script>
+</body>
+</html>

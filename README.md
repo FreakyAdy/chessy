@@ -6,7 +6,8 @@
 **Audit, benchmark, and referee candidate chess AI agents before entering the tournament arena.**
 
 [![CI / Quality Gate](https://img.shields.io/badge/CI%20%2F%20Quality%20Gate-passing-brightgreen.svg)](tests/)
-[![Tests Passing](https://img.shields.io/badge/tests-41%2F41%20passed%20(100%25)-brightgreen.svg)](chess_arena/tests/)
+[![Tests Passing](https://img.shields.io/badge/tests-49%2F49%20passed%20(100%25)-brightgreen.svg)](chess_arena/tests/)
+[![Live Web UI](https://img.shields.io/badge/%F0%9F%8C%90%20Web%20UI-FastAPI%20%2B%20WebSockets-brightgreen.svg)](#-live-web-ui--5-bot-uploader)
 [![Referee Engine](https://img.shields.io/badge/referee-FIDE--compliant-brightgreen.svg)](#-why-chess-arena)
 [![Model Auditor Gate](https://img.shields.io/badge/model%20auditor-verified%20%26%20gated-blue.svg)](#-model-eligibility--qualification-gate-verify_agentpy)
 [![Process Isolation](https://img.shields.io/badge/sandbox-IPC%20subprocess%20isolated-purple.svg)](#-system-architecture)
@@ -16,6 +17,7 @@
 
 <p align="center">
   <a href="#-quick-demo"><b>⚡ Quick Demo</b></a> •
+  <a href="#-live-web-ui--5-bot-uploader"><b>🌐 Live Web UI</b></a> •
   <a href="#-why-chess-arena"><b>💡 Why Chess Arena</b></a> •
   <a href="#-model-eligibility--qualification-gate-verify_agentpy"><b>🛡️ Model Eligibility Gate</b></a> •
   <a href="#-benchmark-positions--compliance-matrix"><b>📊 Benchmark Suite</b></a> •
@@ -82,7 +84,19 @@ $ python verify_agent.py uploaded_agents/template_agent.py
 
 ---
 
-### 2. Live In-Place Terminal Match Visualization
+### 2. Live Web UI & 5-Bot Tournament Uploader
+
+Launch the full-featured browser Web UI with the exact TrueColor board aesthetic, real-time WebSocket move streaming, and a drag-and-drop bot uploader (supporting up to 5 candidate bots):
+
+```bash
+$ python main.py --web
+# Or: python web_server.py --port 8000
+```
+Open **`http://127.0.0.1:8000`** in any browser.
+
+---
+
+### 3. Live In-Place Terminal Match Visualization
 
 Watch tournament games execute in real time on a dedicated, high-contrast, TrueColor live chessboard that updates in-place without terminal flickering:
 
@@ -186,6 +200,33 @@ agents:
     config:
       temperature: 0.2
 ```
+
+---
+
+## 🌐 Live Web UI & 5-Bot Uploader
+
+`Chess Arena` provides a web application styled identically to the TrueColor terminal visualizer, featuring real-time WebSocket match streaming and a drag-and-drop model qualification gate.
+
+### Launching the Web Server
+
+```bash
+# Launch via main CLI
+python main.py --web
+
+# Or via dedicated launcher
+python web_server.py --port 8000
+```
+Open **`http://127.0.0.1:8000`** in any web browser.
+
+### Key Web Features:
+1. **Interactive 8x8 Wooden Chessboard**: High-contrast solid white and obsidian piece tiles, move origin/destination highlights, and check pulse indicators.
+2. **Real-Time WebSocket Streaming**: Millisecond-accurate move telemetry, live decision timers, FEN copy tool, and live referee validation.
+3. **5-Bot Uploader & Instant Auditor**:
+   - Drag and drop up to 5 friend `.py` bot files directly into the web UI.
+   - Automatically runs `ModelAuditor` across all 16 FIDE benchmark positions in the background.
+   - Displays live qualification cards with eligibility score, latency measurements, and deficiency details.
+4. **Tournament Controls**: Interactive Play/Pause, dynamic speed slider (0.05s to 1.5s delay), and one-click PGN download.
+5. **Live Updating Standings**: Real-time tournament leaderboard dynamically ranked by points, wins, draws, and win rate.
 
 ---
 
