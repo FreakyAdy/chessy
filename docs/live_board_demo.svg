@@ -1,0 +1,290 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" width="100%" height="100%">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" />
+      <feOffset dx="0" dy="8" />
+      <feComponentTransfer><feFuncA type="linear" slope="0.45"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="tile-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <linearGradient id="term-header" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#24292e"/>
+      <stop offset="100%" stop-color="#1b1f23"/>
+    </linearGradient>
+    <linearGradient id="card-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Terminal Window Frame -->
+  <g filter="url(#shadow)">
+    <rect x="20" y="20" width="860" height="540" rx="14" fill="#0d1117" stroke="#30363d" stroke-width="1.5" />
+    
+    <!-- Title Bar -->
+    <path d="M 20,34 A 14,14 0 0,1 34,20 L 866,20 A 14,14 0 0,1 880,34 L 880,60 L 20,60 Z" fill="url(#term-header)" stroke="#30363d" stroke-width="1" />
+    
+    <!-- Window Control Buttons -->
+    <circle cx="46" cy="40" r="6" fill="#ff5f56" />
+    <circle cx="66" cy="40" r="6" fill="#ffbd2e" />
+    <circle cx="86" cy="40" r="6" fill="#27c93f" />
+    
+    <!-- Terminal Title -->
+    <text x="450" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#8b949e" text-anchor="middle">
+      ♔ Chess Arena — Live Terminal Match Display
+    </text>
+  </g>
+
+  <!-- Content Area -->
+  <g transform="translate(45, 80)">
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="810" height="46" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1" />
+    
+    <!-- Match Info -->
+    <text x="20" y="28" font-family="'JetBrains Mono', 'Fira Code', 'Courier New', monospace" font-size="13" font-weight="700" fill="#58a6ff">
+      Match 1/20
+    </text>
+    <text x="105" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="12" fill="#8b949e">
+      • Round-Robin Tournament
+    </text>
+
+    <!-- Player 1 (White) -->
+    <rect x="330" y="10" width="130" height="26" rx="6" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" />
+    <text x="342" y="27" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#1c1917">♔ GreedyBot</text>
+    
+    <!-- VS -->
+    <text x="480" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="12" font-weight="700" fill="#8b949e">vs</text>
+
+    <!-- Player 2 (Black) -->
+    <rect x="510" y="10" width="145" height="26" rx="6" fill="#1c1917" stroke="#484f58" stroke-width="1" />
+    <text x="522" y="27" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#f5f5f4">♚ Minimax-d2</text>
+
+    <!-- Live Status Pill -->
+    <rect x="715" y="12" width="75" height="22" rx="11" fill="#238636" opacity="0.2"/>
+    <circle cx="727" cy="23" r="3.5" fill="#3fb950"/>
+    <text x="737" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="11" font-weight="700" fill="#3fb950">LIVE</text>
+  </g>
+
+  <!-- Left: 8x8 Chessboard -->
+  <g transform="translate(45, 145)">
+    <!-- Board Frame -->
+    <rect x="18" y="18" width="374" height="374" rx="6" fill="#2d1d13" stroke="#4a3020" stroke-width="3" />
+    <rect x="23" y="23" width="364" height="364" fill="#1e130c" />
+
+    <!-- File Labels (Top & Bottom) -->
+    <text x="47.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">a</text>
+    <text x="47.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">a</text>
+    <text x="92.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">b</text>
+    <text x="92.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">b</text>
+    <text x="137.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">c</text>
+    <text x="137.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">c</text>
+    <text x="182.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">d</text>
+    <text x="182.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">d</text>
+    <text x="227.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">e</text>
+    <text x="227.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">e</text>
+    <text x="272.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">f</text>
+    <text x="272.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">f</text>
+    <text x="317.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">g</text>
+    <text x="317.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">g</text>
+    <text x="362.5" y="14" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">h</text>
+    <text x="362.5" y="405" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">h</text>
+    <text x="10" y="52" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">8</text>
+    <text x="400" y="52" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">8</text>
+    <text x="10" y="97" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">7</text>
+    <text x="400" y="97" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">7</text>
+    <text x="10" y="142" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">6</text>
+    <text x="400" y="142" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">6</text>
+    <text x="10" y="187" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">5</text>
+    <text x="400" y="187" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">5</text>
+    <text x="10" y="232" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">4</text>
+    <text x="400" y="232" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">4</text>
+    <text x="10" y="277" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">3</text>
+    <text x="400" y="277" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">3</text>
+    <text x="10" y="322" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">2</text>
+    <text x="400" y="322" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">2</text>
+    <text x="10" y="367" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">1</text>
+    <text x="400" y="367" font-family="monospace" font-size="11" font-weight="bold" fill="#8b949e" text-anchor="middle">1</text>
+    <rect x="25" y="25" width="45" height="45" fill="#b5936e" />
+    <rect x="30" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="47.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♜</text>
+    <rect x="70" y="25" width="45" height="45" fill="#80522c" />
+    <rect x="75" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="92.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♞</text>
+    <rect x="115" y="25" width="45" height="45" fill="#b5936e" />
+    <rect x="120" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="137.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♝</text>
+    <rect x="160" y="25" width="45" height="45" fill="#80522c" />
+    <rect x="165" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="182.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♛</text>
+    <rect x="205" y="25" width="45" height="45" fill="#b5936e" />
+    <rect x="210" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="227.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♚</text>
+    <rect x="250" y="25" width="45" height="45" fill="#80522c" />
+    <rect x="255" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="272.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♝</text>
+    <rect x="295" y="25" width="45" height="45" fill="#b5936e" />
+    <rect x="300" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="317.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♞</text>
+    <rect x="340" y="25" width="45" height="45" fill="#80522c" />
+    <rect x="345" y="30" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="362.5" y="55" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♜</text>
+    <rect x="25" y="70" width="45" height="45" fill="#80522c" />
+    <rect x="30" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="47.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="70" y="70" width="45" height="45" fill="#b5936e" />
+    <rect x="75" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="92.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="115" y="70" width="45" height="45" fill="#80522c" />
+    <rect x="120" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="137.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="160" y="70" width="45" height="45" fill="#b5936e" />
+    <rect x="165" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="182.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="205" y="70" width="45" height="45" fill="#65a30d" />
+    <rect x="250" y="70" width="45" height="45" fill="#b5936e" />
+    <rect x="255" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="272.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="295" y="70" width="45" height="45" fill="#80522c" />
+    <rect x="300" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="317.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="340" y="70" width="45" height="45" fill="#b5936e" />
+    <rect x="345" y="75" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="362.5" y="100" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="25" y="115" width="45" height="45" fill="#b5936e" />
+    <rect x="70" y="115" width="45" height="45" fill="#80522c" />
+    <rect x="115" y="115" width="45" height="45" fill="#b5936e" />
+    <rect x="160" y="115" width="45" height="45" fill="#80522c" />
+    <rect x="205" y="115" width="45" height="45" fill="#b5936e" />
+    <rect x="250" y="115" width="45" height="45" fill="#80522c" />
+    <rect x="295" y="115" width="45" height="45" fill="#b5936e" />
+    <rect x="340" y="115" width="45" height="45" fill="#80522c" />
+    <rect x="25" y="160" width="45" height="45" fill="#80522c" />
+    <rect x="70" y="160" width="45" height="45" fill="#b5936e" />
+    <rect x="115" y="160" width="45" height="45" fill="#80522c" />
+    <rect x="160" y="160" width="45" height="45" fill="#b5936e" />
+    <rect x="205" y="160" width="45" height="45" fill="#3f6212" />
+    <rect x="210" y="165" width="35" height="35" rx="5" fill="#1c1917" stroke="#44403c" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="227.5" y="190" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f5f5f4" text-anchor="middle">♟</text>
+    <rect x="250" y="160" width="45" height="45" fill="#b5936e" />
+    <rect x="295" y="160" width="45" height="45" fill="#80522c" />
+    <rect x="340" y="160" width="45" height="45" fill="#b5936e" />
+    <rect x="25" y="205" width="45" height="45" fill="#b5936e" />
+    <rect x="70" y="205" width="45" height="45" fill="#80522c" />
+    <rect x="115" y="205" width="45" height="45" fill="#b5936e" />
+    <rect x="160" y="205" width="45" height="45" fill="#80522c" />
+    <rect x="205" y="205" width="45" height="45" fill="#b5936e" />
+    <rect x="210" y="210" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="227.5" y="235" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="250" y="205" width="45" height="45" fill="#80522c" />
+    <rect x="295" y="205" width="45" height="45" fill="#b5936e" />
+    <rect x="340" y="205" width="45" height="45" fill="#80522c" />
+    <rect x="25" y="250" width="45" height="45" fill="#80522c" />
+    <rect x="70" y="250" width="45" height="45" fill="#b5936e" />
+    <rect x="115" y="250" width="45" height="45" fill="#80522c" />
+    <rect x="160" y="250" width="45" height="45" fill="#b5936e" />
+    <rect x="205" y="250" width="45" height="45" fill="#80522c" />
+    <rect x="250" y="250" width="45" height="45" fill="#15803d" />
+    <rect x="255" y="255" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="272.5" y="280" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♞</text>
+    <rect x="295" y="250" width="45" height="45" fill="#80522c" />
+    <rect x="340" y="250" width="45" height="45" fill="#b5936e" />
+    <rect x="25" y="295" width="45" height="45" fill="#b5936e" />
+    <rect x="30" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="47.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="70" y="295" width="45" height="45" fill="#80522c" />
+    <rect x="75" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="92.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="115" y="295" width="45" height="45" fill="#b5936e" />
+    <rect x="120" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="137.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="160" y="295" width="45" height="45" fill="#80522c" />
+    <rect x="165" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="182.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="205" y="295" width="45" height="45" fill="#b5936e" />
+    <rect x="250" y="295" width="45" height="45" fill="#80522c" />
+    <rect x="255" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="272.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="295" y="295" width="45" height="45" fill="#b5936e" />
+    <rect x="300" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="317.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="340" y="295" width="45" height="45" fill="#80522c" />
+    <rect x="345" y="300" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="362.5" y="325" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♟</text>
+    <rect x="25" y="340" width="45" height="45" fill="#80522c" />
+    <rect x="30" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="47.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♜</text>
+    <rect x="70" y="340" width="45" height="45" fill="#b5936e" />
+    <rect x="75" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="92.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♞</text>
+    <rect x="115" y="340" width="45" height="45" fill="#80522c" />
+    <rect x="120" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="137.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♝</text>
+    <rect x="160" y="340" width="45" height="45" fill="#b5936e" />
+    <rect x="165" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="182.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♛</text>
+    <rect x="205" y="340" width="45" height="45" fill="#80522c" />
+    <rect x="210" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="227.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♚</text>
+    <rect x="250" y="340" width="45" height="45" fill="#b5936e" />
+    <rect x="255" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="272.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♝</text>
+    <rect x="295" y="340" width="45" height="45" fill="#80522c" />
+    <rect x="340" y="340" width="45" height="45" fill="#b5936e" />
+    <rect x="345" y="345" width="35" height="35" rx="5" fill="#f5f5f4" stroke="#e5e7eb" stroke-width="1" filter="url(#tile-shadow)" />
+    <text x="362.5" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1c1917" text-anchor="middle">♜</text>
+  </g>
+
+  <!-- Right: Live Match Diagnostics & Move Stream -->
+  <g transform="translate(485, 145)">
+    <!-- Main Card -->
+    <rect x="0" y="18" width="370" height="374" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.2" />
+
+    <!-- Card Title -->
+    <text x="20" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">
+      Live Game Telemetry
+    </text>
+    <line x1="20" y1="62" x2="350" y2="62" stroke="#30363d" stroke-width="1" />
+
+    <!-- Metric 1: Current Turn -->
+    <text x="20" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="11" font-weight="600" fill="#8b949e">ACTIVE TURN</text>
+    <rect x="20" y="96" width="330" height="32" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+    <circle cx="36" cy="112" r="5" fill="#f5f5f4" stroke="#1c1917" stroke-width="2"/>
+    <text x="50" y="116" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#e6edf3">Black to Move (Minimax-d2)</text>
+
+    <!-- Metric 2: Last Move -->
+    <text x="20" y="148" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="11" font-weight="600" fill="#8b949e">LAST MOVE PLAYED</text>
+    <rect x="20" y="156" width="155" height="34" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+    <text x="32" y="178" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="800" fill="#3fb950">2. ... e7-e5</text>
+
+    <!-- Metric 3: Move Clock -->
+    <text x="195" y="148" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="11" font-weight="600" fill="#8b949e">DECISION TIME</text>
+    <rect x="195" y="156" width="155" height="34" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+    <text x="207" y="178" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#79c0ff">0.14s / 5.00s</text>
+
+    <!-- Metric 4: FEN Snapshot -->
+    <text x="20" y="212" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="11" font-weight="600" fill="#8b949e">CURRENT FEN (STATE FORMAT)</text>
+    <rect x="20" y="220" width="330" height="42" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+    <text x="30" y="244" font-family="'JetBrains Mono', monospace" font-size="10" fill="#d2a8ff">rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP...</text>
+
+    <!-- Metric 5: Referee Status -->
+    <text x="20" y="284" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif" font-size="11" font-weight="600" fill="#8b949e">REFEREE STATUS &amp; RULES</text>
+    <rect x="20" y="292" width="330" height="82" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+    
+    <text x="32" y="312" font-family="'JetBrains Mono', monospace" font-size="11" fill="#7ee787">✓ Legality Verified (python-chess Core)</text>
+    <text x="32" y="332" font-family="'JetBrains Mono', monospace" font-size="11" fill="#e6edf3">• Legal Moves Available: 30</text>
+    <text x="32" y="352" font-family="'JetBrains Mono', monospace" font-size="11" fill="#8b949e">• Halfmove Clock: 1  |  Fullmove: 2</text>
+    <text x="32" y="367" font-family="'JetBrains Mono', monospace" font-size="11" fill="#8b949e">• Insufficient Material: False  |  Check: False</text>
+  </g>
+
+  <!-- Bottom Footer Status -->
+  <g transform="translate(45, 545)">
+    <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="11" fill="#6e7681">
+      pgn: games/game_0001.pgn • TrueColor In-Place Update (Rich Live) • Subprocess Sandboxed
+    </text>
+  </g>
+</svg>
