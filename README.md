@@ -3,7 +3,7 @@
 # ♔ `Chess Arena`
 ### A Production-Grade Multi-Agent Competition Framework & Model Eligibility Gate
 
-**Audit, benchmark, and referee candidate chess AI agents before entering the tournament arena.**
+**Host real-time AI chess tournaments in a live browser UI, audit custom models across 16 FIDE edge benchmarks, and referee agent matches in isolated sandboxes.**
 
 [![CI / Quality Gate](https://img.shields.io/badge/CI%20%2F%20Quality%20Gate-passing-brightgreen.svg)](tests/)
 [![Tests Passing](https://img.shields.io/badge/tests-49%2F49%20passed%20(100%25)-brightgreen.svg)](chess_arena/tests/)
@@ -12,17 +12,18 @@
 [![Model Auditor Gate](https://img.shields.io/badge/model%20auditor-verified%20%26%20gated-blue.svg)](#-model-eligibility--qualification-gate-verify_agentpy)
 [![Process Isolation](https://img.shields.io/badge/sandbox-IPC%20subprocess%20isolated-purple.svg)](#-system-architecture)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
-[![Live TUI Board](https://img.shields.io/badge/terminal%20display-TrueColor%20Live%20TUI-orange.svg)](#-live-terminal-visualizer)
+[![Live TUI Board](https://img.shields.io/badge/terminal%20display-TrueColor%20Live%20TUI-orange.svg)](#-terminal-match-visualization)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 <p align="center">
   <a href="#-quick-demo"><b>⚡ Quick Demo</b></a> •
-  <a href="#-live-web-ui--5-bot-uploader"><b>🌐 Live Web UI</b></a> •
+  <a href="#-live-web-ui--5-bot-tournament-hosting"><b>🌐 Live Web UI</b></a> •
+  <a href="#-how-to-build-a-tournament-compliant-bot"><b>🤖 Build a Bot</b></a> •
+  <a href="#-community-ai-prompt-generate-a-bot-in-seconds"><b>💬 AI Prompt for Bots</b></a> •
   <a href="#-why-chess-arena"><b>💡 Why Chess Arena</b></a> •
   <a href="#-model-eligibility--qualification-gate-verify_agentpy"><b>🛡️ Model Eligibility Gate</b></a> •
   <a href="#-benchmark-positions--compliance-matrix"><b>📊 Benchmark Suite</b></a> •
   <a href="#-system-architecture"><b>📐 Architecture</b></a> •
-  <a href="#-agent-roster--baselines"><b>🤖 Agent Roster</b></a> •
   <a href="#-quick-start"><b>🚀 Quick Start</b></a>
 </p>
 
@@ -38,12 +39,27 @@
 
 ## ⚡ Quick Demo
 
-### 1. Auditing an External / Friend Model for Tournament Eligibility
+### 1. Host Live Tournaments in the Web UI *(Recommended)*
 
-Audit any custom model (e.g. from `uploaded_agents/friend_bot.py` or module spec) across **16 critical FIDE positions**, benchmark its decision latency, and verify subprocess IPC isolation:
+The primary and recommended way to run tournaments is through the **Live Web UI**. It provides drag-and-drop bot uploading (up to 5 bots), real-time move animations over WebSockets, live telemetry, and an automated leaderboard:
 
 ```bash
-$ python verify_agent.py uploaded_agents/template_agent.py
+# Launch the live web server
+$ python main.py --web
+
+# Or use the standalone launcher:
+$ python web_server.py --port 8000
+```
+Open **`http://127.0.0.1:8000`** in your browser. Click **"🤖 Manage Bots"** to drop in custom agent files, select your roster, and click **"▶ Start Tournament"** to watch the pieces battle in real time!
+
+---
+
+### 2. Auditing an External / Friend Model for Tournament Eligibility
+
+Audit any custom model (e.g. from `sample_friend_bot.py` or module spec) across **16 critical FIDE positions**, benchmark its decision latency, and verify subprocess IPC isolation:
+
+```bash
+$ python verify_agent.py sample_friend_bot.py
 ```
 
 ```text
@@ -51,8 +67,8 @@ $ python verify_agent.py uploaded_agents/template_agent.py
 ║                                                                             ║
 ║   🛡️ MODEL ELIGIBILITY & COMPLIANCE AUDIT                                   ║
 ║   ══════════════════════════════════════════════════════════════════        ║
-║    Model Candidate : Auditor-Test-Agent (CommunityFriendAgent)              ║
-║    Source Location : uploaded_agents/template_agent.py                      ║
+║    Model Candidate : Auditor-Test-Agent (TacticalRaiderBot)                 ║
+║    Source Location : sample_friend_bot.py                                   ║
 ║    Qualification   : ELIGIBLE FOR TOURNAMENT                                ║
 ║    Score           : 93/100  (20/20 checks passed)                          ║
 ║                                                                             ║
@@ -61,9 +77,9 @@ $ python verify_agent.py uploaded_agents/template_agent.py
 │                                                                             │
 │   Benchmark Metric             Measurement      Threshold   Status          │
 │  ──────────────────────────────────────────────────────────────────         │
-│   Average Move Latency              0.1 ms              —     ✅            │
-│   95th Percentile Latency           0.1 ms      < 4000 ms     ✅            │
-│   Peak Decision Time                0.1 ms      < 5000 ms     ✅            │
+│   Average Move Latency              0.2 ms              —     ✅            │
+│   95th Percentile Latency           0.4 ms      < 4000 ms     ✅            │
+│   Peak Decision Time                0.4 ms      < 5000 ms     ✅            │
 │   Tested Benchmark Positions            14   16 positions     ✅            │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -75,8 +91,8 @@ $ python verify_agent.py uploaded_agents/template_agent.py
 │ config.yaml:                                                                │
 │                                                                             │
 │   - name: "Auditor-Test-Agent"                                              │
-│     module: "uploaded_agents/template_agent.py"                             │
-│     class: "CommunityFriendAgent"                                           │
+│     module: "sample_friend_bot.py"                                          │
+│     class: "TacticalRaiderBot"                                              │
 │     config: {}                                                              │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -84,21 +100,9 @@ $ python verify_agent.py uploaded_agents/template_agent.py
 
 ---
 
-### 2. Live Web UI & 5-Bot Tournament Uploader
+### 3. Terminal Match Visualization *(Headless / CLI)*
 
-Launch the full-featured browser Web UI with the exact TrueColor board aesthetic, real-time WebSocket move streaming, and a drag-and-drop bot uploader (supporting up to 5 candidate bots):
-
-```bash
-$ python main.py --web
-# Or: python web_server.py --port 8000
-```
-Open **`http://127.0.0.1:8000`** in any browser.
-
----
-
-### 3. Live In-Place Terminal Match Visualization
-
-Watch tournament games execute in real time on a dedicated, high-contrast, TrueColor live chessboard that updates in-place without terminal flickering:
+For terminal-only environments or remote SSH sessions, watch tournament games execute in real time on a dedicated in-place live chessboard without terminal flickering:
 
 ```bash
 $ python main.py --display --delay 0.1
@@ -133,6 +137,160 @@ $ python main.py --display --delay 0.1
 
 ---
 
+## 🌐 Live Web UI & 5-Bot Tournament Hosting
+
+The **Chess Arena Web UI** is the centerpiece of the framework, offering an interactive competition dashboard that mirrors the macOS TrueColor terminal aesthetic.
+
+### Launching the Web Server
+
+```bash
+# Recommended command:
+python main.py --web
+
+# Or specify a custom port:
+python web_server.py --port 8080
+```
+Then navigate to **`http://127.0.0.1:8000`** in any web browser.
+
+### Key Web UI Features:
+1. **Interactive 8×8 Wooden Chessboard**:
+   - High-contrast piece tiles (`#1c1917 on #f5f5f4` for White, `#f5f5f4 on #1c1917` for Black) that stay crisp on every square.
+   - Dynamic move origin (`#65a30d`) and destination (`#3f6212`) highlights.
+   - Pulsing red check alert indicator (`#ef4444`) on King squares under attack.
+   - Captured piece graveyard tracking material balance for both sides.
+2. **Real-Time WebSocket Streaming (`/ws/live`)**:
+   - Zero-lag move updates with live decision stopwatch (`0.14s / 5.00s`).
+   - One-click copyable FEN state string.
+   - Live referee status: Legal move counter, 50-move rule clock, and check status.
+   - Scrollable historical move log with timestamps.
+3. **5-Bot Uploader & Instant Eligibility Gate**:
+   - Click **"🤖 Manage Bots"** to open the drag-and-drop modal.
+   - Drop up to 5 custom Python bot files (`.py`) into the drop zone.
+   - Automatically executes the 16-FEN qualification audit in the background.
+   - Instant scorecard displaying eligibility verdict, score, latency, and fix guidelines.
+   - Checkbox roster selector allowing you to pick any 2 to 5 bots for the upcoming bracket.
+4. **Live Playback Controls & Leaderboard**:
+   - Start, Pause, Resume, and Stop controls.
+   - Interactive speed slider (from ultra-fast `0.05s` up to `1.50s` per move).
+   - Format switcher (Round-Robin vs Single Elimination).
+   - Dynamic tournament standings table updating points, wins, draws, losses, and win rate.
+   - One-click PGN match download button.
+   - Procedural wooden move click audio feedback (with mute toggle).
+
+---
+
+## 🤖 How to Build a Tournament-Compliant Bot
+
+Any model (heuristic engine, Minimax search, RL policy, MCTS, or LLM-based player) can compete in Chess Arena as long as it adheres to the lightweight `ChessAgent` contract.
+
+### 1. The Bot Contract
+
+Create a Python file (e.g. `my_agent.py`) and inherit from `ChessAgent`:
+
+```python
+from chess_arena.arena.adapter import ChessAgent
+import chess
+
+class MyChessBot(ChessAgent):
+    def __init__(self, name: str = "MyChessBot", config: dict | None = None) -> None:
+        """Initialize hyperparameters, load model weights, or set search depth."""
+        super().__init__(name=name, config=config or {})
+
+    def get_move(self, fen: str, legal_moves: list[str]) -> str:
+        """Choose and return one legal UCI move.
+
+        Parameters
+        ----------
+        fen : str
+            The board position in Forsyth–Edwards Notation.
+        legal_moves : list[str]
+            Every strictly legal move available (e.g. ['e2e4', 'g1f3', ...]).
+
+        Returns
+        -------
+        str
+            A valid move in UCI format (e.g. 'e2e4', 'e7e8q').
+        """
+        # Your custom logic here (search, heuristics, neural net, etc.)
+        return legal_moves[0]
+```
+
+### 2. Requirements to Pass the 16-FEN Qualification Audit
+
+To receive an `ELIGIBLE FOR TOURNAMENT` verdict from the auditor, your bot must satisfy these 6 rules:
+
+| Rule | Requirement | What Fails the Audit |
+| :--- | :--- | :--- |
+| **1. Strict Legality** | Pick a move exclusively from `legal_moves`. | Returning illegal moves, moving pinned pieces, or advancing into check. |
+| **2. UCI Move Format** | Format move strings as 4–5 character UCI (`e2e4`, `g1f3`). | Returning SAN (`Nf3`), descriptive notation (`P-K4`), or non-string objects. |
+| **3. Pawn Promotions** | When promoting, always append the promotion piece letter (`e7e8q`, `e7e8r`, `e7e8b`, `e7e8n`). | Returning 4 characters on promotion (`e7e8`), which is ambiguous in chess rules. |
+| **4. Check Responses** | When under check, play a legal king evasion, block, or capture. | Ignoring checks or attempting impossible moves. |
+| **5. Latency Budget** | Decide each move within the time limit (< 5.00s, ideally < 100ms). | Infinite loops, deep unpruned searches, or slow network calls. |
+| **6. Subprocess Safety** | Run cleanly in isolated child processes without side-effects. | Calling `sys.exit()`, raising unhandled exceptions, or hanging IPC pipes. |
+
+### 3. Pre-Test Before Uploading
+
+Before uploading your bot to the web interface or tournament roster, run the standalone validator CLI:
+
+```bash
+python verify_agent.py path/to/my_agent.py
+```
+
+If it prints `ELIGIBLE FOR TOURNAMENT`, your bot is 100% ready to compete!
+
+---
+
+## 💬 Community AI Prompt (Generate a Bot in Seconds)
+
+Want to build a competitive bot using an AI assistant (**ChatGPT, Claude, Gemini, or Cursor**)? Copy and paste the prompt below:
+
+<details open>
+<summary><b>📋 Click to copy the AI Prompt for building a compliant Chess Arena bot</b></summary>
+
+```text
+You are an expert Chess AI systems engineer. Build a high-performance, tournament-compliant chess agent in Python for the "Chess Arena" competition framework.
+
+The agent MUST strictly conform to the following specifications:
+
+1. ARCHITECTURE & IMPORTS:
+   - Inherit from `ChessAgent`:
+     ```python
+     from chess_arena.arena.adapter import ChessAgent
+     import chess
+     ```
+   - Class constructor:
+     ```python
+     def __init__(self, name: str = "CandidateBot", config: dict | None = None) -> None:
+         super().__init__(name=name, config=config or {})
+     ```
+   - Core move method:
+     ```python
+     def get_move(self, fen: str, legal_moves: list[str]) -> str:
+     ```
+
+2. STRICT RULES & AUDIT CRITERIA:
+   - `legal_moves` is a Python list of UCI strings (e.g. ['e2e4', 'g1f3', 'e7e8q']).
+   - The returned move MUST be a string from `legal_moves`. NEVER return an illegal move.
+   - If `move.promotion` occurs, ensure the UCI string includes the promotion piece character (e.g. 'e7e8q').
+   - Must handle complex FIDE edge cases gracefully: checks, castling, en passant, promotions, pins, and endgames.
+   - Must respond within 5.0 seconds (target average < 50ms).
+   - Must never call `sys.exit()` or raise uncaught exceptions; wrap logic in a try/except fallback that defaults to `legal_moves[0]`.
+
+3. DESIRED STRATEGY:
+   Implement an intelligent tactical bot that evaluates:
+   - Pawn promotions (prioritizing Queening).
+   - MVV-LVA captures (Most Valuable Victim - Least Valuable Attacker) using standard piece values (P=100, N=320, B=330, R=500, Q=900, K=20000).
+   - Tactical checks and forced checkmates.
+   - Positional center control bonus (e4, d4, e5, d5, c4, f4, c5, f5).
+   - Piece development and king safety.
+
+Please output the complete, self-contained Python file ready to be saved as `my_bot.py` and uploaded to Chess Arena.
+```
+
+</details>
+
+---
+
 ## 💡 Why Chess Arena?
 
 When evaluating Reinforcement Learning models, LLM agents, or heuristic search engines in competitive chess, naive execution scripts fail in production:
@@ -144,10 +302,11 @@ When evaluating Reinforcement Learning models, LLM agents, or heuristic search e
 
 | Dimension | Naive Tournament Scripts | Chess Arena Framework |
 | :--- | :--- | :--- |
+| **Live Web Hosting** | None / console text only | **Full Web UI** with WebSocket streaming, speed slider, and 5-bot uploader |
 | **Move Validation** | Basic piece movement checks | **Strict FIDE Referee** (En Passant, 3-fold repetition, 50-move rule, check evasion, castling rights) |
 | **Process Isolation** | In-process execution (one crash halts tournament) | **Subprocess IPC Pipe Isolation** with hard per-move timeouts (`AgentProcess`) |
 | **Model Eligibility Gate** | None (crashes mid-tournament) | **Automated 16-FEN Rule & Latency Auditor** (`verify_agent.py`) |
-| **Live Visualization** | Scrolling terminal spam / prints new board every move | **Live In-Place TrueColor TUI** with anti-contrast wooden board theme |
+| **Live Visualization** | Scrolling terminal spam / prints new board every move | **Live TrueColor Web UI & In-Place Terminal TUI** with anti-contrast wooden board theme |
 | **Tournament Formats** | Hardcoded 1v1 loop | **Round-Robin** & **Single-Elimination** brackets with PGN export & tie-breaks |
 | **Agent Interface** | Custom, divergent APIs | Standardized `ChessAgent` with plug-and-play `.py` support |
 
@@ -165,19 +324,22 @@ Have your friend provide their Python agent file, or drop it into `uploaded_agen
 uploaded_agents/
 └── friend_bot.py      # Your friend's custom agent
 ```
-*(You can also use the included template: `uploaded_agents/template_agent.py`)*
+*(You can also test with the included sample: [`sample_friend_bot.py`](sample_friend_bot.py))*
 
 #### Step 2: Run the Auditor
-Run the auditor via CLI or using the interactive prompt:
+Run the auditor via the Web UI (drag & drop) or using the CLI:
 
 ```bash
-# Option A: Direct file audit
-python verify_agent.py uploaded_agents/friend_bot.py
+# Option A: In the Web UI
+Open http://127.0.0.1:8000 -> Click "Manage Bots" -> Drag & drop your bot!
 
-# Option B: Integration via main CLI
-python main.py --verify-agent uploaded_agents/friend_bot.py
+# Option B: Direct CLI file audit
+python verify_agent.py sample_friend_bot.py
 
-# Option C: Interactive picker (automatically scans uploaded_agents/)
+# Option C: Integration via main CLI
+python main.py --verify-agent sample_friend_bot.py
+
+# Option D: Interactive picker (automatically scans uploaded_agents/)
 python verify_agent.py
 ```
 
@@ -195,38 +357,11 @@ If the model passes, the auditor generates the exact YAML snippet to copy into `
 ```yaml
 agents:
   - name: "Friend-Alpha-Zero"
-    module: "uploaded_agents/friend_bot.py"
-    class: "FriendAgent"
+    module: "sample_friend_bot.py"
+    class: "TacticalRaiderBot"
     config:
       temperature: 0.2
 ```
-
----
-
-## 🌐 Live Web UI & 5-Bot Uploader
-
-`Chess Arena` provides a web application styled identically to the TrueColor terminal visualizer, featuring real-time WebSocket match streaming and a drag-and-drop model qualification gate.
-
-### Launching the Web Server
-
-```bash
-# Launch via main CLI
-python main.py --web
-
-# Or via dedicated launcher
-python web_server.py --port 8000
-```
-Open **`http://127.0.0.1:8000`** in any web browser.
-
-### Key Web Features:
-1. **Interactive 8x8 Wooden Chessboard**: High-contrast solid white and obsidian piece tiles, move origin/destination highlights, and check pulse indicators.
-2. **Real-Time WebSocket Streaming**: Millisecond-accurate move telemetry, live decision timers, FEN copy tool, and live referee validation.
-3. **5-Bot Uploader & Instant Auditor**:
-   - Drag and drop up to 5 friend `.py` bot files directly into the web UI.
-   - Automatically runs `ModelAuditor` across all 16 FIDE benchmark positions in the background.
-   - Displays live qualification cards with eligibility score, latency measurements, and deficiency details.
-4. **Tournament Controls**: Interactive Play/Pause, dynamic speed slider (0.05s to 1.5s delay), and one-click PGN download.
-5. **Live Updating Standings**: Real-time tournament leaderboard dynamically ranked by points, wins, draws, and win rate.
 
 ---
 
@@ -264,8 +399,9 @@ flowchart TD
     subgraph INGESTION["1. Agent Ingestion & Qualification Gate"]
         M1["Friend Bot (.py)"] --> AUD["ModelAuditor (verify_agent.py)"]
         M2["Built-in Agents"] --> AUD
+        M3["Web Drag & Drop"] --> AUD
         AUD -->|16 Benchmark FENs| CHK["Rule & Latency Check"]
-        CHK -->|Eligible?| CFG["config.yaml Roster"]
+        CHK -->|Eligible?| CFG["config.yaml / Web Roster"]
     end
 
     subgraph SANDBOX["2. Subprocess Sandbox & IPC Isolation"]
@@ -284,8 +420,9 @@ flowchart TD
     end
 
     subgraph PRESENTATION["4. Presentation & Standings"]
-        MATCH --> DISP["LiveDisplay (display.py)"]
+        MATCH --> DISP["LiveDisplay (display.py) / Web Bridge"]
         DISP --> TUI["Rich In-Place Terminal Board"]
+        DISP --> WEB["Live Web UI (FastAPI + WebSockets)"]
         MATCH --> TOUR["Tournament Director (tournament.py)"]
         TOUR --> PGN["PGN Archive (games/*.pgn)"]
         TOUR --> RES["Final Standings (results/standings.txt)"]
@@ -305,7 +442,7 @@ flowchart TD
 | **`CenterControlAgent`** | `chess_arena.agents.center_control_agent` | Positional heuristic agent | Prioritizes controlling central squares (`d4`, `d5`, `e4`, `e5`) and piece development. |
 | **`MinimaxAgent`** | `chess_arena.agents.minimax_agent` | Depth-limited tree search | 2-3 ply Minimax with Alpha-Beta pruning, piece-square positional tables, and king safety. |
 | **`HumanAgent`** | `chess_arena.agents.human_agent` | Interactive CLI player | Allows humans to test and play directly against AI models from the terminal. |
-| **`CommunityFriendAgent`** | `uploaded_agents.template_agent` | Customizable starter template | Boilerplate starter with capture priorities and center control for community models. |
+| **`TacticalRaiderBot`** | `sample_friend_bot.py` | Community template bot | Demonstrates promotions, tactical checks, MVV-LVA captures, and center control. |
 
 ---
 
@@ -318,42 +455,39 @@ flowchart TD
 git clone https://github.com/FreakyAdy/chessy.git
 cd chessy
 
-# Install dependencies (python-chess, rich, pyyaml)
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Verify Your Environment
+### 2. Launch the Web UI *(Recommended)*
 
-Run the full referee and model auditor test suite (41 unit tests):
+```bash
+python main.py --web
+```
+Open **`http://127.0.0.1:8000`** in your browser. Upload bots or pick built-in agents, configure match speed, and watch tournaments live!
+
+### 3. Verify Your Environment
+
+Run the full referee, web server, and model auditor test suite (49 unit tests):
 
 ```bash
 python -m unittest discover -s chess_arena/tests
 ```
 
-### 3. Audit a Friend's Model
-
-Before adding any external code to your tournament, audit it:
+### 4. Audit a Friend's Model via CLI
 
 ```bash
-python verify_agent.py uploaded_agents/template_agent.py
+python verify_agent.py sample_friend_bot.py
 ```
 
-### 4. Run a Tournament
-
-Run a round-robin tournament across the configured roster:
+### 5. Run a Headless / Terminal Tournament
 
 ```bash
 # Run in background with summary output
 python main.py
 
 # Run with LIVE in-place animated terminal chessboard
-python main.py --display
-
-# Customise animation speed and game pause
 python main.py --display --delay 0.15 --pause 2.5
-
-# Switch tournament format to Single Elimination
-python main.py --format single_elimination --display
 ```
 
 ---
@@ -400,10 +534,10 @@ agents:
     config:
       depth: 2
 
-  # Friend or custom model admitted via ModelAuditor:
-  - name: "Friend-Alpha-Bot"
-    module: "uploaded_agents/template_agent.py"
-    class: "CommunityFriendAgent"
+  # Custom community model admitted via ModelAuditor:
+  - name: "TacticalRaider"
+    module: "sample_friend_bot.py"
+    class: "TacticalRaiderBot"
     config: {}
 ```
 
@@ -428,17 +562,26 @@ chessy/
 │   │   ├── center_control_agent.py # Positional center-control baseline
 │   │   ├── minimax_agent.py    # Minimax depth-limited search with alpha-beta
 │   │   └── human_agent.py      # Interactive human CLI player
+│   ├── web/
+│   │   ├── app.py              # FastAPI REST endpoints & WebSocket server
+│   │   ├── tournament_bridge.py# Async tournament coordinator & event streamer
+│   │   └── static/
+│   │       ├── index.html      # SVG-matching semantic UI layout
+│   │       ├── styles.css      # TrueColor wooden board palette & glassmorphism
+│   │       └── app.js          # Live board renderer, WS client & bot uploader
 │   └── tests/
 │       ├── test_edge_cases.py  # Forced mates, pins, repetition tests
 │       ├── test_referee.py     # FIDE rule compliance tests
 │       ├── test_runner.py      # Match orchestration & PGN generation tests
-│       └── test_validator.py   # ModelAuditor eligibility gate tests
-├── uploaded_agents/
-│   └── template_agent.py       # Starter template for friend & community models
+│       ├── test_validator.py   # ModelAuditor eligibility gate tests
+│       └── test_web.py         # FastAPI REST & WebSocket streaming tests
+├── uploaded_agents/            # Directory where uploaded community bots are saved
+├── sample_friend_bot.py        # Complete, tested custom friend bot ready for upload
 ├── games/                      # Automatically archived PGN records
 ├── results/                    # Final tournament standings output
 ├── verify_agent.py             # Standalone Model Eligibility Gate CLI
-├── main.py                     # Tournament CLI entry point
+├── web_server.py               # Standalone Web UI server launcher
+├── main.py                     # Primary tournament CLI & server entry point
 ├── config.yaml                 # Active tournament configuration
 └── requirements.txt            # Python dependencies
 ```
@@ -449,8 +592,9 @@ chessy/
 
 Contributions are welcome! Whether you are submitting a new heuristic agent, an RL policy adapter, or additional referee test vectors:
 
-1. Submitting a new Agent: Copy `uploaded_agents/template_agent.py`, implement your strategy, and verify it with `python verify_agent.py <your_file>`.
-2. Open a Pull Request with your verified agent and test coverage.
+1. Build your bot using the [AI Prompt](#-community-ai-prompt-generate-a-bot-in-seconds) or copy [`sample_friend_bot.py`](sample_friend_bot.py).
+2. Test it locally: `python verify_agent.py <your_file>.py`.
+3. Open a Pull Request with your verified agent and test coverage.
 
 ---
 
